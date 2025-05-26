@@ -2,265 +2,411 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Ficha Clínica Fauna - La Granja</title>
+  <title>Ficha Clínica - CRF "La Granja"</title>
   <style>
+    @page {
+      size: A4 portrait;
+      margin: 1.5cm;
+    }
     body {
       font-family: Arial, sans-serif;
-      margin: 30px;
       background: #fff;
+      margin: 0;
+      padding: 0;
     }
-    .ficha {
-      width: 800px;
-      border: 2px solid #333;
-      padding: 24px;
-      margin: auto;
+    .a4-wrap {
+      max-width: 185mm;
+      min-height: 260mm;
+      margin: 0 auto;
+      box-sizing: border-box;
       background: #fff;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .header {
+      padding: 16px 0 8px 0;
+      font-size: 1.05em;
+      font-weight: bold;
       text-align: left;
-      font-weight: bold;
-      margin-bottom: 8px;
+      letter-spacing: 0.5px;
     }
-    .section-title {
-      font-weight: bold;
-      margin-top: 16px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid #aaa;
-      padding-bottom: 2px;
-    }
-    label {
-      font-weight: bold;
-      margin-right: 4px;
-    }
-    input[type="text"], input[type="date"], input[type="number"] {
-      border: none;
-      border-bottom: 1px solid #888;
-      background: transparent;
-      font-size: 1em;
-      width: 120px;
-      margin-bottom: 6px;
-    }
-    .row {
+    .main-row {
       display: flex;
       flex-direction: row;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
+      gap: 16px;
+      width: 100%;
+    }
+    .reg-entrada-box {
+      border: 2px solid #333;
+      padding: 7px 10px 7px 10px;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
-    .col {
+    .reg-entrada-label {
+      font-size: 1.07em;
+      font-weight: bold;
+      margin-bottom: 3px;
+      letter-spacing: 0.6px;
+    }
+    .reg-entrada-input {
+      border: 2px solid #333;
+      border-radius: 3px;
+      width: 85px;
+      height: 27px;
+      font-size: 1.1em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 7px;
+      margin-top: 2px;
+      background: #f5f5f5;
+    }
+    .fecha-label {
+      font-size: 0.95em;
+      font-weight: bold;
+      margin-bottom: 2px;
+      margin-top: 4px;
+    }
+    .fecha-input {
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      width: 90px;
+      height: 21px;
+      font-size: 0.98em;
+      text-align: center;
+      background: #fafafa;
+    }
+    .datos-laterales {
       flex: 1;
-      margin-right: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 100%;
+      gap: 3px;
     }
-    textarea {
-      width: 98%;
-      height: 40px;
-      border: 1px solid #888;
-      resize: vertical;
-      margin-bottom: 8px;
-      font-family: Arial, sans-serif;
+    .datos-pares {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+      width: 100%;
     }
-    .box {
-      border: 1px solid #888;
-      width: 18px;
-      height: 18px;
+    .campo-label {
+      font-weight: bold;
+      font-size: 1em;
+      margin-right: 2px;
+      min-width: 70px;
       display: inline-block;
-      vertical-align: middle;
+    }
+    .campo-input {
+      border: none;
+      border-bottom: 1.4px solid #666;
+      font-size: 1em;
+      background: transparent;
+      margin-right: 12px;
+      min-width: 60px;
+      max-width: 220px;
+      padding-left: 2px;
+      flex: 1 1 90px;
+      box-sizing: border-box;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 1.23em;
+      font-weight: bold;
+      margin: 14px 0 7px 0;
+      letter-spacing: 0.5px;
+      text-decoration: underline;
+    }
+    .bloque-campo {
+      width: 100%;
+      border: 1.2px solid #888;
+      background: #fdfdfd;
+      font-size: 1em;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+    .bloque-label {
+      font-weight: bold;
+      padding: 3px 0 1px 8px;
+      border-bottom: 1.2px solid #888;
+      background: #f7f7f7;
+      font-size: 1em;
+      letter-spacing: 0.4px;
+    }
+    .campo-textarea {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 1em;
+      padding: 7px 8px 7px 8px;
+      resize: none;
+      box-sizing: border-box;
+      min-height: 65px;
+      margin: 0;
+    }
+    .bloque-campo.pequeno .campo-textarea { min-height: 65px; max-height: 85px;}
+    .bloque-campo.medio .campo-textarea { min-height: 90px; max-height: 130px;}
+    .bloque-campo.grande .campo-textarea { min-height: 145px; max-height: 220px;}
+    .line-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 4px;
+      gap: 12px;
+      width: 100%;
+    }
+    .line-label {
+      font-weight: bold;
+      margin-right: 8px;
+      min-width: 45px;
+    }
+    .campo-inline {
+      border: none;
+      border-bottom: 1.2px solid #666;
+      font-size: 1em;
+      background: transparent;
+      margin-right: 10px;
+      min-width: 35px;
+      width: 80px;
+      max-width: 120px;
+    }
+    .campo-inline-medio {
+      width: 110px;
+      min-width: 60px;
+      max-width: 160px;
+    }
+    .campo-inline-largo {
+      width: 230px;
+      min-width: 180px;
+      max-width: 340px;
+    }
+    .salida-row {
+      display: flex;
+      flex-direction: row;
+      margin-top: 12px;
+      width: 100%;
+      gap: 16px;
+    }
+    .salida-caja {
+      border: 2px solid #333;
+      padding: 10px 10px 7px 10px;
+      min-width: 120px;
+      max-width: 125px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 0;
+      background: #fafafb;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+    .salida-label {
+      font-size: 1.03em;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .salida-fecha {
+      border: 1.2px solid #888;
+      border-radius: 2px;
+      width: 104px;
+      height: 24px;
+      font-size: 1em;
+      text-align: center;
+      background: #fafafa;
+      margin-bottom: 2px;
+    }
+    .salida-datos-caja {
+      border: 2px solid #333;
+      padding: 8px 12px 7px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #fafafb;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .salida-datos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px 20px;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+    .salida-checkbox-group {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 7px 18px;
+      align-items: center;
+      margin-bottom: 3px;
+      font-size: 0.97em;
+    }
+    .salida-checkbox-label {
+      display: flex;
+      align-items: center;
       margin-right: 8px;
     }
-    .print-only {
-      display: none;
+    .salida-checkbox {
+      width: 16px;
+      height: 16px;
+      border: 1.4px solid #555;
+      margin-right: 3px;
+      accent-color: #222;
     }
     @media print {
       body {
         margin: 0;
-      }
-      .ficha {
-        border: none;
         padding: 0;
-        width: 100%;
       }
-      input, textarea {
-        border: none !important;
+      .a4-wrap {
+        box-shadow: none;
+        border: none;
+        margin: 0 !important;
+        width: 100vw;
+        min-height: 100vh;
+        padding: 0;
+      }
+      input, textarea { border: none !important; background: none !important; color: #000 !important;}
+      .campo-input, .campo-inline, .campo-inline-medio, .campo-inline-largo, .salida-fecha {
+        border-bottom: 1.2px solid #666 !important;
+      }
+      .reg-entrada-input {
+        border: 2px solid #333 !important;
         background: none !important;
       }
-      .print-only {
-        display: block;
-      }
-      .no-print {
-        display: none;
+      .salida-checkbox {
+        border: 1.4px solid #555 !important;
       }
     }
   </style>
 </head>
 <body>
-  <div class="ficha">
+  <div class="a4-wrap">
     <div class="header">
-      GENERALITAT VALENCIANA - Centro de Recuperación de Fauna "La Granja"
+      CENTRO DE RECUPERACIÓN DE FAUNA "LA GRANJA"
     </div>
-
-    <div class="row">
-      <div class="col">
-        <label>REG. ENTRADA:</label>
-        <input type="text" name="reg_entrada">
+    <!-- Primera fila: REG. ENTRADA y datos laterales -->
+    <div class="main-row">
+      <div class="reg-entrada-box">
+        <div class="reg-entrada-label">REG. ENTRADA</div>
+        <input class="reg-entrada-input" type="text" name="reg_entrada">
+        <div class="fecha-label">Fecha</div>
+        <input class="fecha-input" type="date" name="fecha_entrada">
       </div>
-      <div class="col">
-        <label>Fecha:</label>
-        <input type="date" name="fecha_entrada">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <label>ESPECIE:</label>
-        <input type="text" name="especie">
-      </div>
-      <div class="col">
-        <label>MUNICIPIO DE LOCALIZACIÓN:</label>
-        <input type="text" name="municipio">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>COORD. UTM:</label>
-        <input type="text" name="coord_utm">
-      </div>
-      <div class="col">
-        <label>APOYO ELEC.:</label>
-        <input type="text" name="apoyo_elec">
-      </div>
-      <div class="col">
-        <label>ANILLAS:</label>
-        <input type="text" name="anillas">
+      <div class="datos-laterales">
+        <div class="datos-pares">
+          <span class="campo-label">ESPECIE</span>
+          <input class="campo-input" type="text" name="especie">
+          <span class="campo-label">MUNICIPIO DE LOCALIZACIÓN</span>
+          <input class="campo-input" type="text" name="municipio">
+        </div>
+        <div class="datos-pares">
+          <span class="campo-label">COORD. UTM</span>
+          <input class="campo-input" type="text" name="coord_utm">
+          <span class="campo-label">APOYO ELEC.</span>
+          <input class="campo-input" type="text" name="apoyo_elec">
+          <span class="campo-label">ANILLAS</span>
+          <input class="campo-input" type="text" name="anillas">
+        </div>
+        <div class="datos-pares">
+          <span class="campo-label">CAUSA ENTRADA</span>
+          <input class="campo-input" type="text" name="causa_entrada" style="flex:3 1 210px;">
+          <span class="campo-label">REMITENTE</span>
+          <input class="campo-input" type="text" name="remitente" style="flex:3 1 210px;">
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <label>CAUSA ENTRADA:</label>
-        <input type="text" name="causa_entrada">
-      </div>
-      <div class="col">
-        <label>REMITENTE:</label>
-        <input type="text" name="remitente">
-      </div>
-    </div>
-
+    <!-- Fin primera fila -->
     <div class="section-title">HISTORIA CLÍNICA</div>
-    <div class="row">
-      <div class="col">
-        <label>Edad:</label>
-        <input type="text" name="edad">
-      </div>
-      <div class="col">
-        <label>Sexo:</label>
-        <input type="text" name="sexo">
-      </div>
-      <div class="col">
-        <label>Deshidratación:</label>
-        <input type="text" name="deshidratacion">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Tª:</label>
-        <input type="text" name="temperatura">
-      </div>
-      <div class="col">
-        <label>Peso:</label>
-        <input type="text" name="peso">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Signos clínicos:</label>
-        <textarea name="signos_clinicos"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Examen físico externo:</label>
-        <textarea name="examen_fisico"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Examen radiológico:</label>
-        <textarea name="examen_radiologico"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Fractura</label>
-        <input type="checkbox" name="fractura">
-        <label>Cirugía</label>
-        <input type="checkbox" name="cirugia">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <label>Observaciones:</label>
-        <textarea name="observaciones"></textarea>
-      </div>
+    <div class="line-row">
+      <span class="line-label">SEXO</span>
+      <input class="campo-inline" type="text" name="sexo">
+      <span class="line-label">EDAD</span>
+      <input class="campo-inline" type="text" name="edad">
     </div>
 
-    <div class="section-title">SALIDA</div>
-    <div class="row">
-      <div class="col">
-        <label>Diagnóstico:</label>
-        <textarea name="diagnostico"></textarea>
-      </div>
+    <div class="bloque-campo pequeno" style="border-top-width: 2px;">
+      <div class="bloque-label">OBSERVACIONES</div>
+      <textarea class="campo-textarea" name="observaciones"></textarea>
     </div>
-    <div class="row">
-      <div class="col">
-        <label>Fecha:</label>
-        <input type="date" name="fecha_salida">
-      </div>
-      <div class="col">
-        <label>Motivo:</label>
-        <input type="checkbox" name="sacrificio"> Sacrificio
-        <input type="checkbox" name="muerte"> Muerte
-        <input type="checkbox" name="traslado"> Traslado
-        <input type="checkbox" name="liberacion"> Liberación
-        <input type="checkbox" name="fuga"> Fuga
-        <input type="checkbox" name="reintroduccion"> Reintroducción
-        <input type="checkbox" name="suelta"> Suelta
-        <input type="checkbox" name="otros"> Otros
-      </div>
+    <div class="bloque-campo pequeno">
+      <div class="bloque-label">SIGNOS CLÍNICOS</div>
+      <textarea class="campo-textarea" name="signos_clinicos"></textarea>
     </div>
-    <div class="row">
-      <div class="col">
-        <label>Lugar:</label>
-        <input type="text" name="lugar">
-      </div>
-      <div class="col">
-        <label>Edad:</label>
-        <input type="text" name="edad_salida">
-      </div>
-      <div class="col">
-        <label>Sexo:</label>
-        <input type="text" name="sexo_salida">
-      </div>
-      <div class="col">
-        <label>Peso:</label>
-        <input type="text" name="peso_salida">
-      </div>
-      <div class="col">
-        <label>Anilla:</label>
-        <input type="text" name="anilla_salida">
-      </div>
+    <div class="bloque-campo grande">
+      <div class="bloque-label">EXAMEN FÍSICO EXTERNO</div>
+      <textarea class="campo-textarea" name="examen_fisico"></textarea>
+    </div>
+    <div class="bloque-campo grande">
+      <div class="bloque-label">EXAMEN RADIOLÓGICO</div>
+      <textarea class="campo-textarea" name="examen_radiologico"></textarea>
+    </div>
+    <div class="bloque-campo medio">
+      <div class="bloque-label">DIAGNÓSTICO</div>
+      <textarea class="campo-textarea" name="diagnostico"></textarea>
     </div>
 
-    <div class="row no-print" style="justify-content: flex-end;">
-      <button onclick="window.print()">Imprimir Ficha</button>
+    <div class="line-row" style="margin-top:4px;">
+      <span class="line-label">PESO</span>
+      <input class="campo-inline" type="text" name="peso">
+      <span class="line-label">Tº</span>
+      <input class="campo-inline" type="text" name="temperatura">
+      <span class="line-label" style="min-width: 110px;">DESHIDRATACIÓN</span>
+      <input class="campo-inline-medio" type="text" name="deshidratacion">
     </div>
-    <div class="print-only">
-      <p>Impreso el: <span id="fecha_impresion"></span></p>
+    <!-- SALIDA -->
+    <div class="salida-row">
+      <div class="salida-caja">
+        <span class="salida-label">SALIDA</span>
+        <input class="salida-fecha" type="date" name="fecha_salida">
+      </div>
+      <div class="salida-datos-caja">
+        <div class="salida-datos-grid">
+          <span>
+            <span class="campo-label" style="min-width:40px;">EDAD</span>
+            <input class="campo-inline" type="text" name="edad_salida">
+          </span>
+          <span>
+            <span class="campo-label" style="min-width:40px;">SEXO</span>
+            <input class="campo-inline" type="text" name="sexo_salida">
+          </span>
+          <span>
+            <span class="campo-label" style="min-width:40px;">PESO</span>
+            <input class="campo-inline" type="text" name="peso_salida">
+          </span>
+          <span>
+            <span class="campo-label" style="min-width:55px;">LUGAR</span>
+            <input class="campo-inline-medio" type="text" name="lugar_salida">
+          </span>
+        </div>
+        <div class="salida-checkbox-group">
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> SACRIFICIO</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> MUERTE</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> TRASLADO</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> LIBERACIÓN</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> FUGA</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> REINTRODUCCIÓN</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> SUELTA</label>
+          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> OTROS</label>
+        </div>
+        <div class="line-row" style="margin-top:2px;">
+          <span class="campo-label" style="min-width:55px;">ANILLA</span>
+          <input class="campo-inline-largo" type="text" name="anilla_salida">
+        </div>
+      </div>
     </div>
   </div>
-  <script>
-    // Mostrar fecha de impresión
-    document.addEventListener('DOMContentLoaded', function() {
-      const fecha = new Date();
-      document.getElementById('fecha_impresion').textContent = fecha.toLocaleDateString();
-    });
-  </script>
 </body>
 </html>
