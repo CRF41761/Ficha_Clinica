@@ -218,25 +218,36 @@
         color: transparent !important;
       }
     }
+    /* HISTORIA CLÍNICA */
     .historia-titulo-row {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      margin: 8px 0 7px 0;
-    }
-    .historia-titulo {
-      text-align: center;
-      font-size: 1.22em;
-      font-weight: bold;
-      flex: 1;
-      letter-spacing: 1px;
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 7px 0;
+  position: relative; /* Necesario para posicionar .historia-titulo */
+}
+
+.historia-titulo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+  text-align: center;
+  font-size: 1.22em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  z-index: 1;
+  /* Puedes quitar flex: 1 1 auto; si está puesto antes */
+}
     .historia-cajas {
       display: flex;
       flex-direction: row;
       gap: 19px;
-      margin-right: 18px;
+      margin-left: auto;
+      margin-right: 0;
+      flex: none;
     }
     .historia-caja-mano {
       width: 36px;
@@ -249,8 +260,9 @@
       vertical-align: middle;
       box-sizing: border-box;
     }
+    /* Recuadro general en negrita y borde grueso */
     .cuadro-clinica {
-      border: 1.5px solid #666;
+      border: 2px solid #333;
       border-radius: 3px;
       background: #fdfdfd;
       margin-bottom: 0;
@@ -260,6 +272,7 @@
       padding: 0;
       display: flex;
       flex-direction: column;
+      font-weight: bold;
     }
     .cuadro-linea {
       display: flex;
@@ -409,6 +422,10 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+    /* Quita negrita de FRACTURA y CIRUGÍA */
+    .signos-clinicos-opciones span {
+      font-weight: normal !important;
+    }
     .fake-checkbox {
       width: 14px;
       height: 14px;
@@ -448,10 +465,12 @@
       white-space: nowrap;
       letter-spacing: 0.5px;
       color: #222;
+      font-weight: normal !important; /* quita negrita para CC y números */
     }
     .examen-fisico-cc span {
       margin-left: 1px;
       margin-right: 1px;
+      font-weight: normal !important; /* fuerza sin negrita */
     }
     .salida-row {
       display: flex;
