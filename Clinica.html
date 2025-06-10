@@ -132,7 +132,6 @@
       line-height: 1.05;
       position: relative;
     }
-    /* Negrita para los textos de la tabla de datos */
     .datos-label,
     .apoyo-elec-label-wrap,
     .extra-label {
@@ -212,35 +211,31 @@
         border: 1.5px solid #000 !important;
         background: #fff !important;
       }
-      /* OCULTAR el placeholder de fecha al imprimir */
       .fecha-manual::placeholder,
       .salida-fecha-manual::placeholder {
         color: transparent !important;
       }
     }
-    /* HISTORIA CLÍNICA */
     .historia-titulo-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 8px 0 7px 0;
-  position: relative; /* Necesario para posicionar .historia-titulo */
-}
-
-.historia-titulo {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: max-content;
-  text-align: center;
-  font-size: 1.22em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  z-index: 1;
-  /* Puedes quitar flex: 1 1 auto; si está puesto antes */
-}
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0 7px 0;
+      position: relative;
+    }
+    .historia-titulo {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: max-content;
+      text-align: center;
+      font-size: 1.22em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      z-index: 1;
+    }
     .historia-cajas {
       display: flex;
       flex-direction: row;
@@ -260,7 +255,6 @@
       vertical-align: middle;
       box-sizing: border-box;
     }
-    /* Recuadro general en negrita y borde grueso */
     .cuadro-clinica {
       border: 2px solid #333;
       border-radius: 3px;
@@ -396,7 +390,6 @@
       width: 110px;
       max-width: 120px;
     }
-    /* SIGNOS CLINICOS opciones a la derecha de la cabecera */
     .signos-clinicos-header-row {
       display: flex;
       flex-direction: row;
@@ -422,7 +415,6 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
-    /* Quita negrita de FRACTURA y CIRUGÍA */
     .signos-clinicos-opciones span {
       font-weight: normal !important;
     }
@@ -438,7 +430,6 @@
       background: #fff;
       box-sizing: border-box;
     }
-    /* EXAMEN FÍSICO EXTERNO cabecera + CC a la derecha */
     .examen-fisico-header-row {
       display: flex;
       flex-direction: row;
@@ -465,12 +456,12 @@
       white-space: nowrap;
       letter-spacing: 0.5px;
       color: #222;
-      font-weight: normal !important; /* quita negrita para CC y números */
+      font-weight: normal !important;
     }
     .examen-fisico-cc span {
       margin-left: 1px;
       margin-right: 1px;
-      font-weight: normal !important; /* fuerza sin negrita */
+      font-weight: normal !important;
     }
     .salida-row {
       display: flex;
@@ -804,14 +795,12 @@
         <div style="flex:1"></div>
       </div>
       <div class="salida-datos-caja">
-        <!-- Primera fila: MUERTE, SACRIFICIO, FUGA, REINTRODUCCIÓN -->
         <div class="salida-checkbox-row">
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> MUERTE</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> SACRIFICIO</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> FUGA</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> REINTRODUCCIÓN</label>
         </div>
-        <!-- Segunda fila: TRASLADO, LIBERACIÓN, SUELTA, OTROS: -->
         <div class="salida-checkbox-row2" style="margin-bottom:7px;">
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> TRASLADO</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> LIBERACIÓN</label>
@@ -821,7 +810,6 @@
             <input type="text" style="width:85px;min-width:60px;border:none;border-bottom:1.2px solid #666;margin-left:6px;font-size:0.93em;background:transparent;">
           </label>
         </div>
-        <!-- Tercera fila: EDAD, SEXO, PESO, LUGAR (LUGAR en negrita y más espacio) -->
         <div class="salida-datos-row">
           <span class="campo-label">EDAD</span>
           <input class="campo-inline" type="text" name="edad_salida" style="width:54px;">
@@ -832,7 +820,6 @@
           <span class="campo-label lugar">LUGAR</span>
           <input class="campo-inline-medio" type="text" name="lugar_salida" style="width:130px;">
         </div>
-        <!-- Cuarta fila: ANILLA -->
         <div class="salida-anilla-row">
           <span class="campo-label" style="min-width:55px;">ANILLA</span>
           <input class="campo-inline-largo" type="text" name="anilla_salida">
@@ -840,5 +827,41 @@
       </div>
     </div>
   </div>
+  <!-- SCRIPT DE AUTOCOMPLETADO POR URL -->
+  <script>
+    function getParams() {
+      const params = {};
+      const query = window.location.search.substring(1);
+      for (const pair of query.split("&")) {
+        if (!pair) continue;
+        const [k, v] = pair.split("=");
+        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
+      }
+      return params;
+    }
+
+    function fillForm() {
+      const params = getParams();
+      // Campos con nombres alternativos entre hoja y HTML
+      const map = {
+        "numero_de_entrada": "reg_entrada",
+        "fecha_entrada_manual": "fecha_entrada_manual",
+        "especie_nombre_cientifico": "especie",
+        "municipio": "municipio",
+        "coordenadas_del_mapa": "coord_utm",
+        "apoyo": "apoyo_elec",
+        "cra_y_km": "km_ctra",
+        "posible_causa": "causa_entrada",
+        "remitente": "remitente",
+        "observaciones": "observaciones"
+      };
+      for (const key in params) {
+        const htmlName = map[key] || key;
+        const el = document.querySelector(`[name="${htmlName}"]`);
+        if (el) el.value = params[key];
+      }
+    }
+    window.onload = fillForm;
+  </script>
 </body>
 </html>
