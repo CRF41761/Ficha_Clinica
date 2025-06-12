@@ -24,17 +24,8 @@
       flex-direction: column;
       background: #fff;
     }
-    /* ... Aquí continúa todo tu CSS original, sin cambios ... */
-    /* Por motivos de espacio, se asume que el resto del CSS de tu ficha clínica sigue aquí,
-       tal como lo enviaste en tu mensaje inicial. */
-
-    .trasera-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      page-break-before: always;
-    }
+    /* Puedes seguir poniendo aquí todo tu CSS personalizado para la ficha clínica */
+    /* ... */
   </style>
 </head>
 <body>
@@ -217,7 +208,7 @@
       </div>
     </div>
   </div>
-  <!-- Cara trasera, después del cierre de la ficha -->
-  <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="trasera-img">
+  <!-- SOLO esta línea después del cierre de la ficha principal -->
+  <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" style="display:block; width:100%; height:auto; page-break-before:always;">
 </body>
 </html>
