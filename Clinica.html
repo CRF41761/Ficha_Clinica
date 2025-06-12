@@ -25,211 +25,34 @@
       background: #fff;
     }
     /* ... todo tu CSS igual ... */
-    /* El resto de las reglas CSS que ya tienes van aquí sin cambios */
-    /* ... */
+    /* (el resto de tu CSS personalizado va aquí, sin tocar nada más) */
 
-    /* Añadido para la imagen trasera */
+    /* Solo para la imagen trasera */
     .back-page-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      page-break-before: always;
+      display: none;
     }
 
     @media print {
       .back-page-img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
         display: block;
         page-break-before: always;
+        width: 100vw;    /* Ocupa todo el ancho físico del papel */
+        max-width: 100vw;
+        height: auto;
+        margin: 0;
+        padding: 0;
       }
     }
   </style>
 </head>
 <body>
   <div class="a4-wrap">
-    <div class="header">
-      CENTRO DE RECUPERACIÓN DE FAUNA "LA GRANJA"
-    </div>
-    <!-- ... resto de tu HTML igual ... -->
-    <!-- REG. ENTRADA + DATOS EN CAJA -->
-    <div class="main-row">
-      <div class="reg-entrada-box">
-        <div class="reg-entrada-label">REG. ENTRADA</div>
-        <input class="reg-entrada-input" type="text" name="reg_entrada" autocomplete="off">
-        <div class="fecha-label">Fecha</div>
-        <input class="fecha-input" type="date" name="fecha_entrada" autocomplete="off" placeholder=" ">
-        <input class="fecha-manual" type="text" name="fecha_entrada_manual" maxlength="10" placeholder="dd/mm/aaaa" onfocus="this.placeholder='';" onblur="if(this.value==''){this.placeholder='dd/mm/aaaa';}" autocomplete="off">
-      </div>
-      <div class="datos-caja">
-        <table class="datos-tabla">
-          <tr>
-            <td class="datos-label">ESPECIE:</td>
-            <td><input class="datos-input" type="text" name="especie"></td>
-          </tr>
-          <tr>
-            <td class="datos-label">MUNICIPIO DE LOCALIZACIÓN:</td>
-            <td><input class="datos-input" type="text" name="municipio"></td>
-          </tr>
-          <tr>
-            <td class="datos-label">COORDENADAS:</td>
-            <td><input class="datos-input" type="text" name="coord_utm"></td>
-          </tr>
-          <tr class="apoyo-elec-row">
-            <td class="datos-label apoyo-elec-td" style="min-width:74px;">
-              <span class="apoyo-elec-label-wrap">
-                APOYO ELEC.:<input class="apoyo-elec-input" type="text" name="apoyo_elec">
-              </span>
-            </td>
-            <td>
-              <div class="apoyo-elec-km-ctra-flex">
-                <span class="extra-label">Km CTRA:</span>
-                <input class="extra-input" type="text" name="km_ctra">
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="datos-label">ANILLAS:</td>
-            <td><input class="datos-input" type="text" name="anillas"></td>
-          </tr>
-          <tr>
-            <td class="datos-label">CAUSA ENTRADA:</td>
-            <td><input class="datos-input" type="text" name="causa_entrada"></td>
-          </tr>
-          <tr>
-            <td class="datos-label">REMITENTE:</td>
-            <td><input class="datos-input" type="text" name="remitente"></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <!-- HISTORIA CLÍNICA Y CUADRADOS -->
-    <div class="historia-titulo-row">
-      <div class="historia-titulo">HISTORIA CLÍNICA</div>
-      <div class="historia-cajas">
-        <span class="historia-caja-mano"></span>
-        <span class="historia-caja-mano"></span>
-      </div>
-    </div>
-    <!-- CUADRO CLÍNICA ENGLOBADO -->
-    <div class="cuadro-clinica">
-      <!-- SEXO / EDAD -->
-      <div class="cuadro-linea sexo-edad-row">
-        <div class="campo-sexo">
-          <span class="cuadro-label">SEXO</span>
-          <input class="mini-campo-inline" type="text" name="sexo">
-        </div>
-        <div class="campo-edad">
-          <span class="cuadro-label">EDAD</span>
-          <input class="mini-campo-inline" type="text" name="edad">
-        </div>
-      </div>
-      <!-- PESO / Tº / DESHIDRATACIÓN -->
-      <div class="cuadro-linea peso-row">
-        <div class="campo-peso">
-          <span class="cuadro-label peso-label">PESO</span>
-          <input class="mini-campo-inline" type="text" name="peso">
-        </div>
-        <div class="campo-temp">
-          <span class="cuadro-label temperatura-label">Tº</span>
-          <input class="mini-campo-inline" type="text" name="temperatura">
-        </div>
-        <div class="campo-desh">
-          <span class="cuadro-label deshidratacion-label">DESHIDRATACIÓN</span>
-          <input class="mini-campo-inline-medio" type="text" name="deshidratacion">
-        </div>
-      </div>
-      <!-- OBSERVACIONES -->
-      <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
-        <span class="cuadro-area-label">OBSERVACIONES:</span>
-        <textarea class="cuadro-textarea cuadro-area-pequeno" name="observaciones"></textarea>
-      </div>
-      <!-- SIGNOS CLÍNICOS cabecera + opciones a la derecha -->
-      <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
-        <div class="signos-clinicos-header-row">
-          <span class="signos-clinicos-label">SIGNOS CLÍNICOS:</span>
-          <div class="signos-clinicos-opciones">
-            <span><span class="fake-checkbox"></span>FRACTURA</span>
-            <span><span class="fake-checkbox"></span>CIRUGÍA</span>
-          </div>
-        </div>
-        <textarea class="cuadro-textarea cuadro-area-pequeno" name="signos_clinicos"></textarea>
-      </div>
-      <!-- EXAMEN FÍSICO EXTERNO cabecera + CC a la derecha -->
-      <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
-        <div class="examen-fisico-header-row">
-          <span class="examen-fisico-label">EXAMEN FÍSICO EXTERNO:</span>
-          <div class="examen-fisico-cc">
-            CC:
-            <span>0</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-          </div>
-        </div>
-        <textarea class="cuadro-textarea cuadro-area-grande" name="examen_fisico"></textarea>
-      </div>
-      <!-- EXAMEN RADIOLÓGICO -->
-      <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
-        <span class="cuadro-area-label">EXAMEN RADIOLÓGICO:</span>
-        <textarea class="cuadro-textarea cuadro-area-grande" name="examen_radiologico"></textarea>
-      </div>
-      <!-- DIAGNÓSTICO -->
-      <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
-        <span class="cuadro-area-label">DIAGNÓSTICO:</span>
-        <textarea class="cuadro-textarea cuadro-area-medio" name="diagnostico"></textarea>
-      </div>
-    </div>
-    <!-- SALIDA -->
-    <div class="salida-row" style="align-items: stretch;">
-      <div class="salida-caja" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-start;height:auto;">
-        <span class="salida-label">SALIDA</span>
-        <div class="salida-fecha-label">Fecha</div>
-        <input class="salida-fecha" type="date" name="fecha_salida" placeholder=" ">
-        <input class="salida-fecha-manual" type="text" name="fecha_salida_manual" maxlength="10" placeholder="dd/mm/aaaa"
-          onfocus="this.placeholder='';" onblur="if(this.value==''){this.placeholder='dd/mm/aaaa';}" autocomplete="off">
-        <div style="flex:1"></div>
-      </div>
-      <div class="salida-datos-caja">
-        <!-- Primera fila: MUERTE, SACRIFICIO, FUGA, REINTRODUCCIÓN -->
-        <div class="salida-checkbox-row">
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> MUERTE</label>
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> SACRIFICIO</label>
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> FUGA</label>
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> REINTRODUCCIÓN</label>
-        </div>
-        <!-- Segunda fila: TRASLADO, LIBERACIÓN, SUELTA, OTROS: -->
-        <div class="salida-checkbox-row2" style="margin-bottom:7px;">
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> TRASLADO</label>
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> LIBERACIÓN</label>
-          <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> SUELTA</label>
-          <label class="salida-checkbox-label" style="flex:1 1 0;min-width:120px;">
-            <input type="checkbox" class="salida-checkbox" style="margin-right:2px;"> OTROS:
-            <input type="text" style="width:85px;min-width:60px;border:none;border-bottom:1.2px solid #666;margin-left:6px;font-size:0.93em;background:transparent;">
-          </label>
-        </div>
-        <!-- Tercera fila: EDAD, SEXO, PESO, LUGAR (LUGAR en negrita y más espacio) -->
-        <div class="salida-datos-row">
-          <span class="campo-label">EDAD</span>
-          <input class="campo-inline" type="text" name="edad_salida" style="width:54px;">
-          <span class="campo-label">SEXO</span>
-          <input class="campo-inline" type="text" name="sexo_salida" style="width:54px;">
-          <span class="campo-label">PESO</span>
-          <input class="campo-inline" type="text" name="peso_salida" style="width:54px;">
-          <span class="campo-label lugar">LUGAR</span>
-          <input class="campo-inline-medio" type="text" name="lugar_salida" style="width:130px;">
-        </div>
-        <!-- Cuarta fila: ANILLA -->
-        <div class="salida-anilla-row">
-          <span class="campo-label" style="min-width:55px;">ANILLA</span>
-          <input class="campo-inline-largo" type="text" name="anilla_salida">
-        </div>
-      </div>
-    </div>
+    <!-- ... Aquí va TODO el contenido de tu ficha clínica ... -->
+    <!-- (no pongas la imagen trasera dentro de este div) -->
+    <!-- ... Copia aquí exactamente tu ficha principal ... -->
+    <!-- ... Fin de la ficha ... -->
   </div>
-  <!-- SEGUNDA CARA: imagen trasera, ya girada -->
+  <!-- Aquí, fuera del .a4-wrap y sin estilos en línea -->
   <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="back-page-img">
 </body>
 </html>
