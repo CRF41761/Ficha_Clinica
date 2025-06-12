@@ -24,37 +24,23 @@
       flex-direction: column;
       background: #fff;
     }
-    /* ... tu CSS personalizado aquí, sin cambios ... */
+    /* ... tu CSS personalizado para la ficha clínica aquí ... */
 
+    /* Imagen trasera: sólo el salto de página y ancho 100% */
     .back-page-img {
       width: 100%;
       height: auto;
       display: block;
-      margin: 0 auto;
       page-break-before: always;
-      /* Se ve en pantalla y al imprimir */
-    }
-
-    @media print {
-      .back-page-img {
-        width: 100vw;
-        max-width: 100vw;
-        height: auto;
-        display: block;
-        page-break-before: always;
-        margin: 0;
-        padding: 0;
-      }
     }
   </style>
 </head>
 <body>
   <div class="a4-wrap">
-    <!-- ... todo tu contenido de ficha clínica aquí ... -->
-    <!-- Puedes pegar aquí exactamente el bloque de tu HTML de la ficha principal, sin cambios -->
-    <!-- ... FIN ficha clínica ... -->
+    <!-- ... TODO tu contenido de la ficha clínica aquí ... -->
+    <!-- copia y pega exactamente la ficha principal dentro de este div -->
   </div>
-  <!-- Segunda cara: imagen trasera, ya girada -->
+  <!-- Segunda cara: imagen trasera, ya girada y sin estilos extra -->
   <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="back-page-img">
 </body>
 </html>
