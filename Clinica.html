@@ -14,39 +14,64 @@
       margin: 0;
       padding: 0;
     }
-    .a4-wrap {
+    section.ficha-a4 {
       max-width: 185mm;
       min-height: 260mm;
       margin: 0 auto;
+      background: #fff;
       box-sizing: border-box;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      background: #fff;
+      display: block;
     }
-    /* ... tu CSS personalizado para la ficha clínica ... */
-
-    /* SEGUNDA CARA: SOLO para impresión */
-    .back-page-print {
-      display: none;
+    section.trasera-a4 {
+      width: 185mm;
+      min-height: 260mm;
+      margin: 0 auto;
+      background: #fff;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      page-break-before: always;
+      /* Elimina padding para que la imagen encaje justo */
+      padding: 0;
+    }
+    .back-page-img {
+      width: 185mm;
+      max-width: 185mm;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      /* No uses vw ni % */
     }
     @media print {
-      .back-page-print {
-        display: block;
-        page-break-before: always;
-        width: 185mm;
-        height: auto;
-        margin: 0 auto;
+      section.ficha-a4, section.trasera-a4 {
+        max-width: 185mm !important;
+        min-height: 260mm !important;
+        width: 185mm !important;
+        margin: 0 auto !important;
         box-sizing: border-box;
+      }
+      section.trasera-a4 {
+        page-break-before: always;
+      }
+      .back-page-img {
+        width: 185mm !important;
+        max-width: 185mm !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
       }
     }
   </style>
 </head>
 <body>
-  <div class="a4-wrap">
-    <!-- ... tu ficha clínica aquí, TODO IGUAL ... -->
-  </div>
-  <!-- SOLO para impresión, invisible en pantalla -->
-  <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="back-page-print">
+  <section class="ficha-a4">
+    <!-- AQUÍ pega TODO tu HTML de la ficha clínica (cara A), igual que siempre -->
+    <!-- ... -->
+  </section>
+  <section class="trasera-a4">
+    <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="back-page-img">
+  </section>
 </body>
 </html>
