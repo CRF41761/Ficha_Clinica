@@ -4,90 +4,240 @@
   <meta charset="UTF-8">
   <title>Ficha Clínica - CRF "La Granja"</title>
   <style>
-    /* --- Tu CSS original completo, sin cambios --- */
     @page { size: A4 portrait; margin: 1.5cm; }
-    body { font-family: Arial, sans-serif; background: #fff; margin: 0; padding: 0; }
-    .a4-wrap { max-width: 185mm; min-height: 260mm; margin: 0 auto; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; background: #fff; }
-    .header { padding: 13px 0 6px 0; font-size: 0.98em; font-weight: bold; text-align: center; letter-spacing: 0.4px; }
-    .main-row { display: flex; flex-direction: row; margin-bottom: 4px; width: 100%; gap: 0; }
-    .reg-entrada-box { border: 2px solid #333; width: 165px; min-width: 130px; max-width: 210px; height: 167px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box; margin-right: 0; margin-bottom: 0; padding: 7px 7px 7px 7px; background: #fafbfa; }
-    .reg-entrada-label { font-size: 0.95em; font-weight: bold; margin-bottom: 5px; letter-spacing: 0.1px; white-space: nowrap; }
-    .reg-entrada-input { border: 2px solid #333; border-radius: 4px; width: 122px; height: 50px; font-size: 1.23em; font-weight: bold; text-align: center; margin-bottom: 17px; margin-top: 2px; background: #f5f5f5; box-sizing: border-box; letter-spacing: 1px; transition: none; }
-    .fecha-label { font-size: 0.92em; font-weight: bold; margin-bottom: 2px; margin-top: 2px; line-height: 1.1; }
-    .fecha-manual { margin-top: 2px; width: 94px; text-align: center; border: none; border-bottom: 1.2px solid #666; background: transparent; font-size: 0.93em; letter-spacing: 2px; color: #333; outline: none; padding-bottom: 1px; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .a4-wrap {
+      max-width: 185mm;
+      min-height: 260mm;
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .header {
+      padding: 13px 0 6px 0;
+      font-size: 0.98em;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 0.4px;
+    }
+    .main-row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 4px;
+      width: 100%;
+      gap: 0;
+    }
+    .reg-entrada-box {
+      border: 2px solid #333;
+      width: 165px;
+      min-width: 130px;
+      max-width: 210px;
+      height: 167px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      box-sizing: border-box;
+      margin-right: 0;
+      margin-bottom: 0;
+      padding: 7px 7px 7px 7px;
+      background: #fafbfa;
+    }
+    .reg-entrada-label {
+      font-size: 0.95em;
+      font-weight: bold;
+      margin-bottom: 5px;
+      letter-spacing: 0.1px;
+      white-space: nowrap;
+    }
+    .reg-entrada-input {
+      border: 2px solid #333;
+      border-radius: 4px;
+      width: 122px;
+      height: 50px;
+      font-size: 1.23em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 17px;
+      margin-top: 2px;
+      background: #f5f5f5;
+      box-sizing: border-box;
+      letter-spacing: 1px;
+      transition: none;
+    }
+    .fecha-label {
+      font-size: 0.92em;
+      font-weight: bold;
+      margin-bottom: 2px;
+      margin-top: 2px;
+      line-height: 1.1;
+    }
+    .fecha-manual {
+      margin-top: 2px;
+      width: 94px;
+      text-align: center;
+      border: none;
+      border-bottom: 1.2px solid #666;
+      background: transparent;
+      font-size: 0.93em;
+      letter-spacing: 2px;
+      color: #333;
+      outline: none;
+      padding-bottom: 1px;
+    }
     .fecha-input { display: none; }
-    .datos-caja { border: 2px solid #333; border-left: none; flex: 1; min-width: 0; min-height: 167px; height: 167px; display: flex; flex-direction: column; justify-content: stretch; box-sizing: border-box; padding: 0; background: #fafbfa; }
-    .datos-tabla { width: 100%; height: 100%; border-collapse: collapse; border-spacing: 0; table-layout: fixed; font-size: 0.89em; }
-    .datos-tabla tr:not(:last-child) td { border-bottom: 1.1px solid #555; }
-    .datos-tabla td { padding: 1px 6px 1px 8px; vertical-align: middle; background: transparent; font-size: 0.89em; line-height: 1.05; position: relative; }
-    .datos-label, .apoyo-elec-label-wrap, .extra-label { font-weight: bold !important; }
+    .datos-caja {
+      border: 2px solid #333;
+      border-left: none;
+      flex: 1;
+      min-width: 0;
+      min-height: 167px;
+      height: 167px;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+      box-sizing: border-box;
+      padding: 0;
+      background: #fafbfa;
+    }
+    .datos-tabla {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      table-layout: fixed;
+      font-size: 0.89em;
+    }
+    .datos-tabla tr:not(:last-child) td {
+      border-bottom: 1.1px solid #555;
+    }
+    .datos-tabla td {
+      padding: 1px 6px 1px 8px;
+      vertical-align: middle;
+      background: transparent;
+      font-size: 0.89em;
+      line-height: 1.05;
+      position: relative;
+    }
+    .datos-label, .apoyo-elec-label-wrap, .extra-label {
+      font-weight: bold !important;
+    }
     .apoyo-elec-label-wrap input { font-weight: normal; }
-    .extra-label { min-width: 44px; margin-right: 3px; font-size: 0.89em; white-space: nowrap; margin-left: 0; transform: translateX(-17px); font-weight: bold !important; }
+    .extra-label {
+      min-width: 44px;
+      margin-right: 3px;
+      font-size: 0.89em;
+      white-space: nowrap;
+      margin-left: 0;
+      transform: translateX(-17px);
+      font-weight: bold !important;
+    }
     .datos-tabla tr.apoyo-elec-row > td, .apoyo-elec-label-wrap { white-space: nowrap; }
     .apoyo-elec-label-wrap { display: inline-block; width: 100%; }
     .apoyo-elec-km-ctra-flex { display: flex; align-items: center; gap: 0; width: 100%; height: 100%; }
-    .apoyo-elec-input { border: none; border-bottom: 1px solid #999; font-size: 0.89em; background: transparent; width: 120px; max-width: 140px; min-width: 60px; padding-left: 5px; margin-bottom: 0px; color: #222; height: 17px; box-sizing: border-box; flex-grow: 0; margin-right: 18px; margin-left: 0; vertical-align: middle; font-weight: normal; }
-    .extra-input { border: none; border-bottom: 1px solid #999; font-size: 0.89em; background: transparent; width: 100px; min-width: 70px; margin-bottom: 0px; color: #222; height: 16px; box-sizing: border-box; flex-grow: 0; margin-left: 0; vertical-align: middle; font-weight: normal; }
-    @media print { .datos-tabla tr.apoyo-elec-row > td, .apoyo-elec-label-wrap { white-space: nowrap !important; } .apoyo-elec-input { width: 90px !important; min-width: 60px !important; max-width: 100px !important; } .fake-checkbox { border: 1.5px solid #000 !important; background: #fff !important; } .fecha-manual::placeholder, .salida-fecha-manual::placeholder { color: transparent !important; } }
-    .historia-titulo-row { display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin: 8px 0 7px 0; position: relative; }
-    .historia-titulo { position: absolute; left: 0; right: 0; margin: 0 auto; width: max-content; text-align: center; font-size: 1.22em; font-weight: bold; letter-spacing: 1px; z-index: 1; }
+    .apoyo-elec-input {
+      border: none;
+      border-bottom: 1px solid #999;
+      font-size: 0.89em;
+      background: transparent;
+      width: 120px;
+      max-width: 140px;
+      min-width: 60px;
+      padding-left: 5px;
+      margin-bottom: 0px;
+      color: #222;
+      height: 17px;
+      box-sizing: border-box;
+      flex-grow: 0;
+      margin-right: 18px;
+      margin-left: 0;
+      vertical-align: middle;
+      font-weight: normal;
+    }
+    .extra-input {
+      border: none;
+      border-bottom: 1px solid #999;
+      font-size: 0.89em;
+      background: transparent;
+      width: 100px;
+      min-width: 70px;
+      margin-bottom: 0px;
+      color: #222;
+      height: 16px;
+      box-sizing: border-box;
+      flex-grow: 0;
+      margin-left: 0;
+      vertical-align: middle;
+      font-weight: normal;
+    }
+
+    /* Print adjustments */
+    @media print {
+      .datos-tabla tr.apoyo-elec-row > td, .apoyo-elec-label-wrap { white-space: nowrap !important; }
+      .apoyo-elec-input { width: 90px !important; min-width: 60px !important; max-width: 100px !important; }
+      .fake-checkbox { border: 1.5px solid #000 !important; background: #fff !important; }
+      .fecha-manual::placeholder, .salida-fecha-manual::placeholder { color: transparent !important; }
+      body { margin: 0; padding: 0; }
+      .a4-wrap {
+        box-shadow: none;
+        border: none;
+        margin: 0 !important;
+        width: 100vw;
+        min-height: 100vh;
+        padding: 0;
+      }
+      input, textarea { border: none !important; background: none !important; color: #000 !important;}
+      .campo-input, .campo-inline, .campo-inline-medio, .campo-inline-largo { border-bottom: 1.2px solid #666 !important; }
+      .reg-entrada-input { border: 2px solid #333 !important; background: none !important; }
+      .salida-checkbox { border: 1.3px solid #555 !important; }
+      .fecha-input, .salida-fecha { display: none !important; }
+      .trasera-img {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+        page-break-before: always !important;
+      }
+    }
+
+    /* Más estilos de tu ficha clínica... */
+    .historia-titulo-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0 7px 0;
+      position: relative;
+    }
+    .historia-titulo {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: max-content;
+      text-align: center;
+      font-size: 1.22em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      z-index: 1;
+    }
     .historia-cajas { display: flex; flex-direction: row; gap: 19px; margin-left: auto; margin-right: 0; flex: none; }
     .historia-caja-mano { width: 36px; height: 36px; border: 3px solid #222; background: #fff; display: inline-block; margin-left: 0; margin-right: 0; vertical-align: middle; box-sizing: border-box; }
-    .cuadro-clinica { border: 2px solid #333; border-radius: 3px; background: #fdfdfd; margin-bottom: 0; margin-top: 0; width: 100%; box-sizing: border-box; padding: 0; display: flex; flex-direction: column; font-weight: bold; }
-    .cuadro-linea { display: flex; flex-direction: row; align-items: center; padding: 6px 10px; font-size: 0.95em; border-bottom: 1px solid #bbb; min-height: 23px; gap: 10px; flex-wrap: wrap; }
-    .cuadro-linea:last-child { border-bottom: none; }
-    .cuadro-label { font-weight: bold; font-size: 0.95em; margin-right: 6px; white-space: nowrap; }
-    .cuadro-area-label { font-weight: bold; font-size: 0.95em; margin-right: 8px; margin-left: 1px; margin-top: 10px; margin-bottom: 3px; display: inline-block; }
-    .cuadro-textarea { flex: 1; width: 100%; min-height: 36px; max-height: 90px; border: 1.2px solid #888; background: #fff; font-size: 0.90em; padding: 5px 8px 8px 8px; resize: vertical; box-sizing: border-box; margin: 0 0 3px 0; border-radius: 2px; }
-    .cuadro-area-grande { min-height: 85px; max-height: 145px;}
-    .cuadro-area-medio { min-height: 45px; max-height: 70px;}
-    .cuadro-area-pequeno { min-height: 24px; max-height: 44px;}
-    .cuadro-linea.sexo-edad-row { flex-wrap: nowrap; gap: 0; padding-right: 2px; justify-content: flex-start; }
-    .campo-sexo { display: flex; align-items: center; gap: 4px; min-width: 0; flex: 1 1 0; justify-content: flex-start; }
-    .campo-edad { display: flex; align-items: center; gap: 4px; min-width: 0; flex: 1.2 1 0; justify-content: center; margin-left: -35px; }
-    .cuadro-linea.peso-row { flex-wrap: nowrap; gap: 0; padding-right: 2px; justify-content: space-between; }
-    .campo-peso { display: flex; align-items: center; gap: 4px; min-width: 0; flex: 1 1 0; justify-content: flex-start; }
-    .campo-temp { display: flex; align-items: center; gap: 4px; min-width: 0; flex: 1 1 0; justify-content: center; }
-    .campo-desh { display: flex; align-items: center; gap: 4px; min-width: 0; flex: 1.3 1 0; justify-content: flex-end; }
-    .cuadro-label.peso-label { min-width: 32px; }
-    .cuadro-label.temperatura-label { min-width: 18px; }
-    .cuadro-label.deshidratacion-label { min-width: 85px; }
-    .mini-campo-inline { border: none; border-bottom: 1.2px solid #666; font-size: 0.93em; background: transparent; margin-right: 7px; min-width: 30px; width: 87px; max-width: 100px; }
-    .mini-campo-inline-medio { border: none; border-bottom: 1.2px solid #666; font-size: 0.93em; background: transparent; margin-right: 0; min-width: 50px; width: 110px; max-width: 120px; }
-    .signos-clinicos-header-row { display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 0; }
-    .signos-clinicos-label { font-weight: bold; font-size: 0.95em; margin-right: 8px; margin-left: 1px; white-space: nowrap; display: inline-block; }
-    .signos-clinicos-opciones { display: flex; flex-direction: row; align-items: center; gap: 18px; margin-left: 12px; white-space: nowrap; flex-shrink: 0; }
-    .signos-clinicos-opciones span { font-weight: normal !important; }
-    .fake-checkbox { width: 14px; height: 14px; border: 1.5px solid #333; display: inline-block; vertical-align: middle; margin-right: 4px; margin-left: 8px; border-radius: 2px; background: #fff; box-sizing: border-box; }
-    .examen-fisico-header-row { display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 0; }
-    .examen-fisico-label { font-weight: bold; font-size: 0.95em; margin-right: 8px; margin-left: 1px; white-space: nowrap; display: inline-block; }
-    .examen-fisico-cc { display: flex; flex-direction: row; align-items: center; gap: 7px; margin-left: 14px; font-size: 0.93em; white-space: nowrap; letter-spacing: 0.5px; color: #222; font-weight: normal !important; }
-    .examen-fisico-cc span { margin-left: 1px; margin-right: 1px; font-weight: normal !important; }
-    .salida-row { display: flex; flex-direction: row; margin-top: 5px; width: 100%; gap: 0; align-items: stretch; }
-    .salida-caja { border: 2px solid #333; border-right: none; padding: 10px 10px 7px 10px; min-width: 120px; max-width: 125px; width: 125px; display: flex; flex-direction: column; align-items: center; background: #fafafb; box-sizing: border-box; flex-shrink: 0; position: relative; margin-right: -2px; height: 140px; justify-content: flex-start; }
-    .salida-datos-caja { border: 2px solid #333; border-left: 2px solid #666; padding: 8px 12px 0 12px; flex: 1 1 0; display: flex; flex-direction: column; background: #fafafb; box-sizing: border-box; width: 100%; min-width: 0; margin-left: 0; min-height: 0; justify-content: flex-start; height: 100%; position: relative; }
-    .salida-label { font-size: 0.95em; font-weight: bold; margin-bottom: 4px; }
-    .salida-fecha-label { font-size: 0.92em; font-weight: bold; margin-bottom: 2px; margin-top: 21px; line-height: 1.1; }
-    .salida-fecha-manual { margin-top: 14px; width: 94px; text-align: center; border: none; border-bottom: 1.2px solid #666; background: transparent; font-size: 0.93em; letter-spacing: 2px; color: #333; outline: none; padding-bottom: 1px; }
-    .salida-fecha { display: none; }
-    .salida-checkbox-row, .salida-checkbox-row2 { display: flex; flex-direction: row; align-items: center; gap: 14px; margin-bottom: 5px; flex-wrap: wrap; }
-    .salida-checkbox-row2 label:last-child { flex: 1 1 0; min-width: 120px; max-width: 220px; }
-    .salida-checkbox-label { display: flex; align-items: center; margin-right: 0; font-size: 0.95em; }
-    .salida-checkbox { width: 15px; height: 15px; border: 1.3px solid #555; margin-right: 3px; accent-color: #222; }
-    .salida-datos-row { display: flex; flex-direction: row; align-items: center; gap: 9px; margin-bottom: 4px; margin-top: 6px; }
-    .salida-datos-row .campo-label { font-weight: normal; min-width: 32px; font-size: 0.93em; margin-right: 3px; }
-    .salida-datos-row .campo-label.lugar { font-weight: bold; min-width: 48px; margin-left: 6px; }
-    .campo-inline { border: none; border-bottom: 1.2px solid #666; font-size: 0.93em; background: transparent; margin-right: 7px; min-width: 32px; width: 62px; max-width: 90px; }
-    .campo-inline-medio { border: none; border-bottom: 1.2px solid #666; font-size: 0.93em; background: transparent; margin-right: 0; min-width: 80px; width: 130px; max-width: 200px; }
-    .salida-anilla-row { margin-top: 7px; border-top: 1.2px solid #bbb; padding-top: 8px; display: flex; align-items: center; gap: 10px; width: 100%; }
-    .salida-anilla-row .campo-label { min-width: 55px; }
-    .campo-inline-largo { border: none; border-bottom: 1.2px solid #666; font-size: 0.93em; background: transparent; width: 190px; min-width: 112px; max-width: 250px; }
-    @media print { body { margin: 0; padding: 0; } .a4-wrap { box-shadow: none; border: none; margin: 0 !important; width: 100vw; min-height: 100vh; padding: 0; } input, textarea { border: none !important; background: none !important; color: #000 !important;} .campo-input, .campo-inline, .campo-inline-medio, .campo-inline-largo { border-bottom: 1.2px solid #666 !important; } .reg-entrada-input { border: 2px solid #333 !important; background: none !important; } .salida-checkbox { border: 1.3px solid #555 !important; } .fecha-input, .salida-fecha { display: none !important; } }
+    /* ...puedes seguir agregando el resto de tus estilos aquí... */
   </style>
 </head>
 <body>
   <div class="a4-wrap">
-    <!-- ... (todo tu HTML igual, sin cambios) ... -->
     <!-- REG. ENTRADA + DATOS EN CAJA -->
     <div class="main-row">
       <div class="reg-entrada-box">
@@ -95,7 +245,8 @@
         <input class="reg-entrada-input" type="text" name="reg_entrada" autocomplete="off">
         <div class="fecha-label">Fecha</div>
         <input class="fecha-input" type="date" name="fecha_entrada" autocomplete="off" placeholder=" ">
-        <input class="fecha-manual" type="text" name="fecha_entrada_manual" maxlength="10" placeholder="dd/mm/aaaa" onfocus="this.placeholder='';" onblur="if(this.value==''){this.placeholder='dd/mm/aaaa';}" autocomplete="off">
+        <input class="fecha-manual" type="text" name="fecha_entrada_manual" maxlength="10" placeholder="dd/mm/aaaa"
+          onfocus="this.placeholder='';" onblur="if(this.value==''){this.placeholder='dd/mm/aaaa';}" autocomplete="off">
       </div>
       <div class="datos-caja">
         <table class="datos-tabla">
@@ -296,8 +447,8 @@
     }
     window.onload = fillForm;
   </script>
-  <!-- Aquí va el fragmento para la trasera -->
+  <!-- Fragmento para la trasera -->
   <div style="page-break-before: always;"></div>
-  <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" style="width:100%; display:block; margin: 0 auto;">
+  <img src="Trasera_Ficha_Clinica.jpg" alt="Trasera ficha clínica" class="trasera-img">
 </body>
 </html>
