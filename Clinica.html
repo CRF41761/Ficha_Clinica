@@ -9,12 +9,13 @@
       margin: 1.5cm;
     }
     body {
-      font-family: Arial, sans-serif;
       background: #fff;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
-    section.ficha-a4 {
+    /* FICHA CLINICA */
+    .ficha {
       max-width: 185mm;
       min-height: 260mm;
       margin: 0 auto;
@@ -22,56 +23,49 @@
       box-sizing: border-box;
       padding: 0;
       display: block;
+      /* Aquí va tu CSS de la ficha clínica (puedes ponerlo aquí o enlazarlo) */
     }
-    section.trasera-a4 {
-      width: 185mm;
-      min-height: 260mm;
+    /* TRASERA */
+    .trasera {
+      display: block;
       margin: 0 auto;
-      background: #fff;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
       page-break-before: always;
-      /* Elimina padding para que la imagen encaje justo */
-      padding: 0;
+      /* NO width: 100vw ni height: 100vh ni nada raro */
     }
-    .back-page-img {
+    .trasera img {
       width: 185mm;
       max-width: 185mm;
       height: auto;
       display: block;
       margin: 0 auto;
-      /* No uses vw ni % */
     }
     @media print {
-      section.ficha-a4, section.trasera-a4 {
+      .ficha {
         max-width: 185mm !important;
         min-height: 260mm !important;
         width: 185mm !important;
         margin: 0 auto !important;
-        box-sizing: border-box;
       }
-      section.trasera-a4 {
+      .trasera {
         page-break-before: always;
       }
-      .back-page-img {
+      .trasera img {
         width: 185mm !important;
         max-width: 185mm !important;
         height: auto !important;
-        display: block !important;
-        margin: 0 auto !important;
       }
     }
   </style>
 </head>
 <body>
-  <section class="ficha-a4">
-    <!-- AQUÍ pega TODO tu HTML de la ficha clínica (cara A), igual que siempre -->
+  <div class="ficha">
+    <!-- PEGA AQUÍ TODO EL HTML DE TU FICHA CLÍNICA (CARA A) -->
+    <!-- Empieza con <div class="header">... y termina con </div> de la ficha -->
     <!-- ... -->
-  </section>
-  <section class="trasera-a4">
-    <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="back-page-img">
-  </section>
+  </div>
+  <div class="trasera">
+    <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica">
+  </div>
 </body>
 </html>
