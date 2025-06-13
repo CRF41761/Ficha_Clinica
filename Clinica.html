@@ -14,13 +14,15 @@
       margin: 0;
       padding: 0;
     }
-    .pagina {
-      width: 185mm;
+    .a4-wrap {
+      max-width: 185mm;
       min-height: 260mm;
       margin: 0 auto;
       box-sizing: border-box;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
       background: #fff;
-      page-break-after: always;
     }
     .header {
       padding: 13px 0 6px 0;
@@ -32,24 +34,25 @@
     .main-row {
       display: flex;
       flex-direction: row;
+      margin-bottom: 4px;
       width: 100%;
-      margin-bottom: 8px;
       gap: 0;
     }
     .reg-entrada-box {
       border: 2px solid #333;
-      width: 170px;
-      min-width: 170px;
-      max-width: 170px;
-      height: 172px;
-      box-sizing: border-box;
+      width: 165px;
+      min-width: 130px;
+      max-width: 210px;
+      height: 167px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      background: #fafbfa;
-      padding: 7px;
+      box-sizing: border-box;
       margin-right: 0;
+      margin-bottom: 0;
+      padding: 7px 7px 7px 7px;
+      background: #fafbfa;
     }
     .reg-entrada-label {
       font-size: 0.95em;
@@ -99,10 +102,10 @@
     .datos-caja {
       border: 2px solid #333;
       border-left: none;
-      flex: 1 1 0;
+      flex: 1;
       min-width: 0;
-      min-height: 172px;
-      height: 172px;
+      min-height: 167px;
+      height: 167px;
       display: flex;
       flex-direction: column;
       justify-content: stretch;
@@ -114,59 +117,130 @@
       width: 100%;
       height: 100%;
       border-collapse: collapse;
+      border-spacing: 0;
       table-layout: fixed;
-      font-size: 0.95em;
+      font-size: 0.89em;
+    }
+    .datos-tabla tr:not(:last-child) td {
+      border-bottom: 1.1px solid #555;
     }
     .datos-tabla td {
-      padding: 2px 6px;
-      border-bottom: 1px solid #bbb;
+      padding: 1px 6px 1px 8px;
       vertical-align: middle;
-    }
-    .datos-tabla tr:last-child td {
-      border-bottom: none;
-    }
-    .datos-input, .apoyo-elec-input, .extra-input {
-      width: 100%;
-      min-width: 60px;
-      max-width: 100%;
-      box-sizing: border-box;
-      border: none;
-      border-bottom: 1px solid #aaa;
       background: transparent;
-      font-size: 1em;
+      font-size: 0.89em;
+      line-height: 1.05;
+      position: relative;
     }
-    .apoyo-elec-km-ctra-flex {
-      display: flex;
-      align-items: center;
+    /* Negrita para los textos de la tabla de datos */
+    .datos-label,
+    .apoyo-elec-label-wrap,
+    .extra-label {
+      font-weight: bold !important;
     }
+    .apoyo-elec-label-wrap input { font-weight: normal; }
     .extra-label {
       min-width: 44px;
       margin-right: 3px;
       font-size: 0.89em;
       white-space: nowrap;
       margin-left: 0;
+      transform: translateX(-17px);
       font-weight: bold !important;
     }
-    .historia-titulo-row {
+    .datos-tabla tr.apoyo-elec-row > td,
+    .apoyo-elec-label-wrap {
+      white-space: nowrap;
+    }
+    .apoyo-elec-label-wrap {
+      display: inline-block;
+      width: 100%;
+    }
+    .apoyo-elec-km-ctra-flex {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      justify-content: space-between;
-      margin: 8px 0 7px 0;
-      position: relative;
+      gap: 0;
+      width: 100%;
+      height: 100%;
     }
-    .historia-titulo {
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      width: max-content;
-      text-align: center;
-      font-size: 1.22em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      z-index: 1;
+    .apoyo-elec-input {
+      border: none;
+      border-bottom: 1px solid #999;
+      font-size: 0.89em;
+      background: transparent;
+      width: 120px;
+      max-width: 140px;
+      min-width: 60px;
+      padding-left: 5px;
+      margin-bottom: 0px;
+      color: #222;
+      height: 17px;
+      box-sizing: border-box;
+      flex-grow: 0;
+      margin-right: 18px;
+      margin-left: 0;
+      vertical-align: middle;
+      font-weight: normal;
     }
+    .extra-input {
+      border: none;
+      border-bottom: 1px solid #999;
+      font-size: 0.89em;
+      background: transparent;
+      width: 100px;
+      min-width: 70px;
+      margin-bottom: 0px;
+      color: #222;
+      height: 16px;
+      box-sizing: border-box;
+      flex-grow: 0;
+      margin-left: 0;
+      vertical-align: middle;
+      font-weight: normal;
+    }
+    @media print {
+      .datos-tabla tr.apoyo-elec-row > td,
+      .apoyo-elec-label-wrap {
+        white-space: nowrap !important;
+      }
+      .apoyo-elec-input {
+        width: 90px !important;
+        min-width: 60px !important;
+        max-width: 100px !important;
+      }
+      .fake-checkbox {
+        border: 1.5px solid #000 !important;
+        background: #fff !important;
+      }
+      /* OCULTAR el placeholder de fecha al imprimir */
+      .fecha-manual::placeholder,
+      .salida-fecha-manual::placeholder {
+        color: transparent !important;
+      }
+    }
+    /* HISTORIA CLÍNICA */
+    .historia-titulo-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 7px 0;
+  position: relative; /* Necesario para posicionar .historia-titulo */
+}
+
+.historia-titulo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+  text-align: center;
+  font-size: 1.22em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  z-index: 1;
+  /* Puedes quitar flex: 1 1 auto; si está puesto antes */
+}
     .historia-cajas {
       display: flex;
       flex-direction: row;
@@ -186,21 +260,26 @@
       vertical-align: middle;
       box-sizing: border-box;
     }
+    /* Recuadro general en negrita y borde grueso */
     .cuadro-clinica {
       border: 2px solid #333;
+      border-radius: 3px;
       background: #fdfdfd;
-      width: 100%;
       margin-bottom: 0;
       margin-top: 0;
-      padding: 0;
+      width: 100%;
       box-sizing: border-box;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
     }
     .cuadro-linea {
       display: flex;
       flex-direction: row;
       align-items: center;
       padding: 6px 10px;
-      font-size: 1em;
+      font-size: 0.95em;
       border-bottom: 1px solid #bbb;
       min-height: 23px;
       gap: 10px;
@@ -211,6 +290,7 @@
     }
     .cuadro-label {
       font-weight: bold;
+      font-size: 0.95em;
       margin-right: 6px;
       white-space: nowrap;
     }
@@ -224,29 +304,78 @@
       display: inline-block;
     }
     .cuadro-textarea {
+      flex: 1;
       width: 100%;
-      min-height: 30px;
-      border: 1px solid #bbb;
+      min-height: 36px;
+      max-height: 90px;
+      border: 1.2px solid #888;
       background: #fff;
-      font-size: 1em;
-      padding: 4px 8px;
+      font-size: 0.90em;
+      padding: 5px 8px 8px 8px;
       resize: vertical;
       box-sizing: border-box;
+      margin: 0 0 3px 0;
+      border-radius: 2px;
     }
     .cuadro-area-grande { min-height: 85px; max-height: 145px;}
     .cuadro-area-medio { min-height: 45px; max-height: 70px;}
     .cuadro-area-pequeno { min-height: 24px; max-height: 44px;}
-    .campo-sexo, .campo-edad, .campo-peso, .campo-temp, .campo-desh {
+    .cuadro-linea.sexo-edad-row {
+      flex-wrap: nowrap;
+      gap: 0;
+      padding-right: 2px;
+      justify-content: flex-start;
+    }
+    .campo-sexo {
       display: flex;
       align-items: center;
       gap: 4px;
       min-width: 0;
+      flex: 1 1 0;
+      justify-content: flex-start;
     }
-    .campo-edad { flex: 1.2 1 0; justify-content: center; margin-left: -35px;}
-    .campo-sexo { flex: 1 1 0; justify-content: flex-start;}
-    .campo-peso { flex: 1 1 0; justify-content: flex-start;}
-    .campo-temp { flex: 1 1 0; justify-content: center;}
-    .campo-desh { flex: 1.3 1 0; justify-content: flex-end;}
+    .campo-edad {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      flex: 1.2 1 0;
+      justify-content: center;
+      margin-left: -35px;
+    }
+    .cuadro-linea.peso-row {
+      flex-wrap: nowrap;
+      gap: 0;
+      padding-right: 2px;
+      justify-content: space-between;
+    }
+    .campo-peso {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      flex: 1 1 0;
+      justify-content: flex-start;
+    }
+    .campo-temp {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      flex: 1 1 0;
+      justify-content: center;
+    }
+    .campo-desh {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      flex: 1.3 1 0;
+      justify-content: flex-end;
+    }
+    .cuadro-label.peso-label { min-width: 32px; }
+    .cuadro-label.temperatura-label { min-width: 18px; }
+    .cuadro-label.deshidratacion-label { min-width: 85px; }
     .mini-campo-inline {
       border: none;
       border-bottom: 1.2px solid #666;
@@ -267,6 +396,7 @@
       width: 110px;
       max-width: 120px;
     }
+    /* SIGNOS CLINICOS opciones a la derecha de la cabecera */
     .signos-clinicos-header-row {
       display: flex;
       flex-direction: row;
@@ -292,6 +422,7 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+    /* Quita negrita de FRACTURA y CIRUGÍA */
     .signos-clinicos-opciones span {
       font-weight: normal !important;
     }
@@ -307,6 +438,7 @@
       background: #fff;
       box-sizing: border-box;
     }
+    /* EXAMEN FÍSICO EXTERNO cabecera + CC a la derecha */
     .examen-fisico-header-row {
       display: flex;
       flex-direction: row;
@@ -333,17 +465,17 @@
       white-space: nowrap;
       letter-spacing: 0.5px;
       color: #222;
-      font-weight: normal !important;
+      font-weight: normal !important; /* quita negrita para CC y números */
     }
     .examen-fisico-cc span {
       margin-left: 1px;
       margin-right: 1px;
-      font-weight: normal !important;
+      font-weight: normal !important; /* fuerza sin negrita */
     }
     .salida-row {
       display: flex;
       flex-direction: row;
-      margin-top: 10px;
+      margin-top: 5px;
       width: 100%;
       gap: 0;
       align-items: stretch;
@@ -351,18 +483,37 @@
     .salida-caja {
       border: 2px solid #333;
       border-right: none;
-      padding: 10px;
+      padding: 10px 10px 7px 10px;
       min-width: 120px;
-      max-width: 130px;
-      width: 130px;
+      max-width: 125px;
+      width: 125px;
       display: flex;
       flex-direction: column;
       align-items: center;
       background: #fafafb;
       box-sizing: border-box;
       flex-shrink: 0;
+      position: relative;
+      margin-right: -2px;
       height: 140px;
       justify-content: flex-start;
+    }
+    .salida-datos-caja {
+      border: 2px solid #333;
+      border-left: 2px solid #666;
+      padding: 8px 12px 0 12px;
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      background: #fafafb;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+      margin-left: 0;
+      min-height: 0;
+      justify-content: flex-start;
+      height: 100%;
+      position: relative;
     }
     .salida-label {
       font-size: 0.95em;
@@ -392,19 +543,8 @@
     .salida-fecha {
       display: none;
     }
-    .salida-datos-caja {
-      border: 2px solid #333;
-      border-left: 2px solid #666;
-      padding: 8px 12px 0 12px;
-      flex: 1 1 0;
-      display: flex;
-      flex-direction: column;
-      background: #fafafb;
-      box-sizing: border-box;
-      min-width: 0;
-      justify-content: flex-start;
-    }
-    .salida-checkbox-row, .salida-checkbox-row2 {
+    .salida-checkbox-row,
+    .salida-checkbox-row2 {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -490,19 +630,12 @@
       min-width: 112px;
       max-width: 250px;
     }
-    /* Trasera */
-    .trasera-img {
-      width: 185mm;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
     @media print {
       body {
         margin: 0;
         padding: 0;
       }
-      .pagina {
+      .a4-wrap {
         box-shadow: none;
         border: none;
         margin: 0 !important;
@@ -528,11 +661,11 @@
   </style>
 </head>
 <body>
-  <!-- CARA 1: Ficha clínica -->
-  <div class="pagina">
+  <div class="a4-wrap">
     <div class="header">
       CENTRO DE RECUPERACIÓN DE FAUNA "LA GRANJA"
     </div>
+    <!-- REG. ENTRADA + DATOS EN CAJA -->
     <div class="main-row">
       <div class="reg-entrada-box">
         <div class="reg-entrada-label">REG. ENTRADA</div>
@@ -583,6 +716,7 @@
         </table>
       </div>
     </div>
+    <!-- HISTORIA CLÍNICA Y CUADRADOS -->
     <div class="historia-titulo-row">
       <div class="historia-titulo">HISTORIA CLÍNICA</div>
       <div class="historia-cajas">
@@ -590,7 +724,9 @@
         <span class="historia-caja-mano"></span>
       </div>
     </div>
+    <!-- CUADRO CLÍNICA ENGLOBADO -->
     <div class="cuadro-clinica">
+      <!-- SEXO / EDAD -->
       <div class="cuadro-linea sexo-edad-row">
         <div class="campo-sexo">
           <span class="cuadro-label">SEXO</span>
@@ -601,6 +737,7 @@
           <input class="mini-campo-inline" type="text" name="edad">
         </div>
       </div>
+      <!-- PESO / Tº / DESHIDRATACIÓN -->
       <div class="cuadro-linea peso-row">
         <div class="campo-peso">
           <span class="cuadro-label peso-label">PESO</span>
@@ -615,10 +752,12 @@
           <input class="mini-campo-inline-medio" type="text" name="deshidratacion">
         </div>
       </div>
+      <!-- OBSERVACIONES -->
       <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
         <span class="cuadro-area-label">OBSERVACIONES:</span>
         <textarea class="cuadro-textarea cuadro-area-pequeno" name="observaciones"></textarea>
       </div>
+      <!-- SIGNOS CLÍNICOS cabecera + opciones a la derecha -->
       <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
         <div class="signos-clinicos-header-row">
           <span class="signos-clinicos-label">SIGNOS CLÍNICOS:</span>
@@ -629,6 +768,7 @@
         </div>
         <textarea class="cuadro-textarea cuadro-area-pequeno" name="signos_clinicos"></textarea>
       </div>
+      <!-- EXAMEN FÍSICO EXTERNO cabecera + CC a la derecha -->
       <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
         <div class="examen-fisico-header-row">
           <span class="examen-fisico-label">EXAMEN FÍSICO EXTERNO:</span>
@@ -642,15 +782,18 @@
         </div>
         <textarea class="cuadro-textarea cuadro-area-grande" name="examen_fisico"></textarea>
       </div>
+      <!-- EXAMEN RADIOLÓGICO -->
       <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
         <span class="cuadro-area-label">EXAMEN RADIOLÓGICO:</span>
         <textarea class="cuadro-textarea cuadro-area-grande" name="examen_radiologico"></textarea>
       </div>
+      <!-- DIAGNÓSTICO -->
       <div class="cuadro-linea" style="flex-direction:column; align-items: flex-start; gap:0;">
         <span class="cuadro-area-label">DIAGNÓSTICO:</span>
         <textarea class="cuadro-textarea cuadro-area-medio" name="diagnostico"></textarea>
       </div>
     </div>
+    <!-- SALIDA -->
     <div class="salida-row" style="align-items: stretch;">
       <div class="salida-caja" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-start;height:auto;">
         <span class="salida-label">SALIDA</span>
@@ -661,12 +804,14 @@
         <div style="flex:1"></div>
       </div>
       <div class="salida-datos-caja">
+        <!-- Primera fila: MUERTE, SACRIFICIO, FUGA, REINTRODUCCIÓN -->
         <div class="salida-checkbox-row">
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> MUERTE</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> SACRIFICIO</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> FUGA</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> REINTRODUCCIÓN</label>
         </div>
+        <!-- Segunda fila: TRASLADO, LIBERACIÓN, SUELTA, OTROS: -->
         <div class="salida-checkbox-row2" style="margin-bottom:7px;">
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> TRASLADO</label>
           <label class="salida-checkbox-label"><input type="checkbox" class="salida-checkbox"> LIBERACIÓN</label>
@@ -676,6 +821,7 @@
             <input type="text" style="width:85px;min-width:60px;border:none;border-bottom:1.2px solid #666;margin-left:6px;font-size:0.93em;background:transparent;">
           </label>
         </div>
+        <!-- Tercera fila: EDAD, SEXO, PESO, LUGAR (LUGAR en negrita y más espacio) -->
         <div class="salida-datos-row">
           <span class="campo-label">EDAD</span>
           <input class="campo-inline" type="text" name="edad_salida" style="width:54px;">
@@ -686,16 +832,13 @@
           <span class="campo-label lugar">LUGAR</span>
           <input class="campo-inline-medio" type="text" name="lugar_salida" style="width:130px;">
         </div>
+        <!-- Cuarta fila: ANILLA -->
         <div class="salida-anilla-row">
           <span class="campo-label" style="min-width:55px;">ANILLA</span>
           <input class="campo-inline-largo" type="text" name="anilla_salida">
         </div>
       </div>
     </div>
-  </div>
-  <!-- CARA 2: Trasera -->
-  <div class="pagina">
-    <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="trasera-img">
   </div>
 </body>
 </html>
