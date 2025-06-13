@@ -22,21 +22,40 @@
       background: #fff;
       page-break-after: always;
     }
-    /* Aquí va tu CSS personalizado para la ficha clínica, si lo necesitas */
     .trasera-img {
       width: 185mm;
       height: auto;
       display: block;
       margin: 0 auto;
     }
+    /* Aquí debajo, tu CSS para la ficha clínica, igual que antes.
+       NO pongas display:flex/grid en .pagina, solo en los hijos.
+       Elimina .a4-wrap. */
+    .header {
+      padding: 13px 0 6px 0;
+      font-size: 0.98em;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 0.4px;
+    }
+    .main-row {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 4px;
+      width: 100%;
+      gap: 0;
+    }
+    /* ... (el resto de tu CSS para la ficha clínica, igual que lo tienes) ... */
   </style>
 </head>
 <body>
+  <!-- CARA 1: Ficha clínica -->
   <div class="pagina">
-    <!-- FICHA CLÍNICA PRINCIPAL (todo tu contenido aquí, SIN .a4-wrap) -->
+    <!-- Aquí TODO el HTML de la ficha clínica, SIN .a4-wrap, SIN .pagina anidados -->
     <div class="header">
       CENTRO DE RECUPERACIÓN DE FAUNA "LA GRANJA"
     </div>
+    <!-- ... tu HTML de la ficha clínica ... -->
     <!-- REG. ENTRADA + DATOS EN CAJA -->
     <div class="main-row">
       <div class="reg-entrada-box">
@@ -212,7 +231,7 @@
       </div>
     </div>
   </div>
-  <!-- SEGUNDA CARA: TRASERA -->
+  <!-- CARA 2: Trasera -->
   <div class="pagina">
     <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="trasera-img">
   </div>
