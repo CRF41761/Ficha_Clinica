@@ -16,7 +16,7 @@
     }
     .pagina, .a4-wrap {
       max-width: 185mm;
-      min-height: 260mm;
+      min-height: 277mm;   /* Ocupa casi todo el alto imprimible de A4 */
       margin: 0 auto;
       box-sizing: border-box;
       padding: 0;
@@ -26,11 +26,16 @@
       page-break-after: always;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
+      min-height: 277mm;
     }
     .a4-wrap {
       display: flex;
       flex-direction: column;
       background: #fff;
+      min-height: 277mm;
+      height: 100%;
+      justify-content: stretch;
     }
     .header {
       padding: 13px 0 6px 0;
@@ -253,6 +258,9 @@
       display: flex;
       flex-direction: column;
       font-weight: bold;
+      flex: 1 1 0;
+      min-height: 430px;
+      justify-content: stretch;
     }
     .cuadro-linea {
       display: flex;
@@ -287,21 +295,25 @@
     .cuadro-textarea {
       flex: 1;
       width: 100%;
-      min-height: 36px;
-      max-height: 90px;
       border: 1.2px solid #888;
       background: #fff;
-      font-size: 0.90em;
-      padding: 5px 8px 8px 8px;
+      font-size: 0.95em;
+      padding: 8px 8px 8px 8px;
       resize: vertical;
       box-sizing: border-box;
       margin: 0 0 3px 0;
       border-radius: 2px;
       font-weight: normal;
+      min-height: 45px;
     }
-    .cuadro-area-grande { min-height: 85px; max-height: 145px;}
-    .cuadro-area-medio { min-height: 45px; max-height: 70px;}
-    .cuadro-area-pequeno { min-height: 24px; max-height: 44px;}
+    /* ¡AUMENTAMOS LOS ALTOS DE ESTOS CAMPOS IMPORTANTES! */
+    .cuadro-area-pequeno[name="observaciones"] { min-height: 100px; }
+    .cuadro-area-grande[name="examen_fisico"] { min-height: 160px; }
+    .cuadro-area-grande[name="examen_radiologico"] { min-height: 120px; }
+    .cuadro-area-medio[name="diagnostico"] { min-height: 60px; }
+    .cuadro-area-pequeno { min-height: 44px; }
+    .cuadro-area-grande { min-height: 90px; }
+    .cuadro-area-medio { min-height: 44px; }
     .cuadro-linea.sexo-edad-row {
       flex-wrap: nowrap;
       gap: 0;
@@ -612,11 +624,12 @@
     /* TRASERA */
     .trasera-img {
       width: 185mm;
-      height: auto;
+      height: 267mm;
       display: block;
       margin: 0 auto;
       box-shadow: 0 2px 8px #aaa;
       background: #fff;
+      object-fit: contain;
     }
     @media print {
       body {
