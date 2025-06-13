@@ -9,27 +9,31 @@
       margin: 1.5cm;
     }
     body {
-      font-family: Arial, sans-serif;
       background: #fff;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
-    .a4-wrap {
-      max-width: 185mm;
+    .pagina {
+      width: 185mm;
       min-height: 260mm;
       margin: 0 auto;
       box-sizing: border-box;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
       background: #fff;
+      page-break-after: always;
     }
-    /* Puedes seguir poniendo aquí todo tu CSS personalizado para la ficha clínica */
-    /* ... */
+    /* Aquí va tu CSS personalizado para la ficha clínica, si lo necesitas */
+    .trasera-img {
+      width: 185mm;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
-  <div class="a4-wrap">
+  <div class="pagina">
+    <!-- FICHA CLÍNICA PRINCIPAL (todo tu contenido aquí, SIN .a4-wrap) -->
     <div class="header">
       CENTRO DE RECUPERACIÓN DE FAUNA "LA GRANJA"
     </div>
@@ -208,7 +212,9 @@
       </div>
     </div>
   </div>
-  <!-- Imagen trasera con ancho limitado y centrada -->
-  <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" style="width:185mm;display:block;margin:0 auto;page-break-before:always;">
+  <!-- SEGUNDA CARA: TRASERA -->
+  <div class="pagina">
+    <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="trasera-img">
+  </div>
 </body>
 </html>
