@@ -827,41 +827,5 @@
       </div>
     </div>
   </div>
-  <!-- SCRIPT DE AUTOCOMPLETADO POR URL -->
-  <script>
-    function getParams() {
-      const params = {};
-      const query = window.location.search.substring(1);
-      for (const pair of query.split("&")) {
-        if (!pair) continue;
-        const [k, v] = pair.split("=");
-        params[decodeURIComponent(k)] = decodeURIComponent(v || "");
-      }
-      return params;
-    }
-
-    function fillForm() {
-      const params = getParams();
-      // Campos con nombres alternativos entre hoja y HTML
-      const map = {
-        "numero_de_entrada": "reg_entrada",
-        "fecha_entrada_manual": "fecha_entrada_manual",
-        "especie_nombre_cientifico": "especie",
-        "municipio": "municipio",
-        "coordenadas_del_mapa": "coord_utm",
-        "apoyo": "apoyo_elec",
-        "cra_y_km": "km_ctra",
-        "posible_causa": "causa_entrada",
-        "remitente": "remitente",
-        "observaciones": "observaciones"
-      };
-      for (const key in params) {
-        const htmlName = map[key] || key;
-        const el = document.querySelector(`[name="${htmlName}"]`);
-        if (el) el.value = params[key];
-      }
-    }
-    window.onload = fillForm;
-  </script>
 </body>
 </html>
