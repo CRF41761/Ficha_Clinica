@@ -197,50 +197,30 @@
       vertical-align: middle;
       font-weight: normal;
     }
-    @media print {
-      .datos-tabla tr.apoyo-elec-row > td,
-      .apoyo-elec-label-wrap {
-        white-space: nowrap !important;
-      }
-      .apoyo-elec-input {
-        width: 90px !important;
-        min-width: 60px !important;
-        max-width: 100px !important;
-      }
-      .fake-checkbox {
-        border: 1.5px solid #000 !important;
-        background: #fff !important;
-      }
-      .fecha-manual::placeholder,
-      .salida-fecha-manual::placeholder {
-        color: transparent !important;
-      }
-    }
+
+    /* --- AJUSTES NUEVOS PARA ALINEACIÓN Y ENCERRADO DE BLOQUES --- */
     .historia-titulo-row {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      margin: 8px 0 7px 0;
+      margin: 12px 0 7px 0;
       position: relative;
     }
     .historia-titulo {
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      width: max-content;
-      text-align: center;
+      flex: 1 1 0;
       font-size: 1.22em;
       font-weight: bold;
+      text-align: center;
       letter-spacing: 1px;
       z-index: 1;
+      position: relative;
     }
     .historia-cajas {
       display: flex;
       flex-direction: row;
       gap: 19px;
-      margin-left: auto;
+      margin-left: 10px;
       margin-right: 0;
       flex: none;
     }
@@ -278,6 +258,7 @@
       min-height: 23px;
       gap: 10px;
       flex-wrap: wrap;
+      background: #fff;
     }
     .cuadro-linea:last-child {
       border-bottom: none;
@@ -293,7 +274,7 @@
       font-size: 0.95em;
       margin-right: 8px;
       margin-left: 1px;
-      margin-top: 10px;
+      margin-top: 6px;
       margin-bottom: 3px;
       display: inline-block;
     }
@@ -310,6 +291,7 @@
       box-sizing: border-box;
       margin: 0 0 3px 0;
       border-radius: 2px;
+      font-weight: normal;
     }
     .cuadro-area-grande { min-height: 85px; max-height: 145px;}
     .cuadro-area-medio { min-height: 45px; max-height: 70px;}
@@ -319,6 +301,7 @@
       gap: 0;
       padding-right: 2px;
       justify-content: flex-start;
+      background: #fff;
     }
     .campo-sexo {
       display: flex;
@@ -342,31 +325,17 @@
       gap: 0;
       padding-right: 2px;
       justify-content: space-between;
+      background: #fff;
     }
-    .campo-peso {
+    .campo-peso, .campo-temp, .campo-desh {
       display: flex;
       align-items: center;
       gap: 4px;
       min-width: 0;
-      flex: 1 1 0;
-      justify-content: flex-start;
     }
-    .campo-temp {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      min-width: 0;
-      flex: 1 1 0;
-      justify-content: center;
-    }
-    .campo-desh {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      min-width: 0;
-      flex: 1.3 1 0;
-      justify-content: flex-end;
-    }
+    .campo-peso { flex: 1 1 0; justify-content: flex-start; }
+    .campo-temp { flex: 1 1 0; justify-content: center; }
+    .campo-desh { flex: 1.3 1 0; justify-content: flex-end; }
     .cuadro-label.peso-label { min-width: 32px; }
     .cuadro-label.temperatura-label { min-width: 18px; }
     .cuadro-label.deshidratacion-label { min-width: 85px; }
@@ -379,6 +348,7 @@
       min-width: 30px;
       width: 87px;
       max-width: 100px;
+      font-weight: normal;
     }
     .mini-campo-inline-medio {
       border: none;
@@ -389,6 +359,7 @@
       min-width: 50px;
       width: 110px;
       max-width: 120px;
+      font-weight: normal;
     }
     .signos-clinicos-header-row {
       display: flex;
@@ -397,6 +368,7 @@
       justify-content: space-between;
       width: 100%;
       margin-bottom: 0;
+      font-weight: bold;
     }
     .signos-clinicos-label {
       font-weight: bold;
@@ -414,6 +386,7 @@
       margin-left: 12px;
       white-space: nowrap;
       flex-shrink: 0;
+      font-weight: normal;
     }
     .signos-clinicos-opciones span {
       font-weight: normal !important;
@@ -429,6 +402,7 @@
       border-radius: 2px;
       background: #fff;
       box-sizing: border-box;
+      font-weight: normal;
     }
     .examen-fisico-header-row {
       display: flex;
@@ -437,6 +411,7 @@
       justify-content: space-between;
       width: 100%;
       margin-bottom: 0;
+      font-weight: bold;
     }
     .examen-fisico-label {
       font-weight: bold;
@@ -463,10 +438,12 @@
       margin-right: 1px;
       font-weight: normal !important;
     }
+
+    /* -- SALIDA BLOQUE -- */
     .salida-row {
       display: flex;
       flex-direction: row;
-      margin-top: 5px;
+      margin-top: 8px;
       width: 100%;
       gap: 0;
       align-items: stretch;
@@ -542,6 +519,7 @@
       gap: 14px;
       margin-bottom: 5px;
       flex-wrap: wrap;
+      font-weight: normal;
     }
     .salida-checkbox-row2 label:last-child {
       flex: 1 1 0;
@@ -553,6 +531,7 @@
       align-items: center;
       margin-right: 0;
       font-size: 0.95em;
+      font-weight: normal;
     }
     .salida-checkbox {
       width: 15px;
@@ -568,6 +547,7 @@
       gap: 9px;
       margin-bottom: 4px;
       margin-top: 6px;
+      font-weight: normal;
     }
     .salida-datos-row .campo-label {
       font-weight: normal;
@@ -589,6 +569,7 @@
       min-width: 32px;
       width: 62px;
       max-width: 90px;
+      font-weight: normal;
     }
     .campo-inline-medio {
       border: none;
@@ -599,6 +580,7 @@
       min-width: 80px;
       width: 130px;
       max-width: 200px;
+      font-weight: normal;
     }
     .salida-anilla-row {
       margin-top: 7px;
@@ -608,6 +590,7 @@
       align-items: center;
       gap: 10px;
       width: 100%;
+      font-weight: normal;
     }
     .salida-anilla-row .campo-label {
       min-width: 55px;
@@ -620,6 +603,7 @@
       width: 190px;
       min-width: 112px;
       max-width: 250px;
+      font-weight: normal;
     }
     @media print {
       body {
