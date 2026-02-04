@@ -132,29 +132,30 @@
     .datos-tabla tr:not(:last-child) td {
       border-bottom: 1.1px solid #555;
     }
-        .datos-tabla td {
-      padding: 1px 2px 1px 4px; /* ⬅️ Menos padding = más espacio para el input */
-      vertical-align: middle;
-      background: transparent;
-      font-size: 0.89em;
-      line-height: 1.05;
-      position: relative;
-    }
+        /* 🔥 CAMBIO 1: Reducir padding izquierdo de TODAS las celdas */
+.datos-tabla td {
+  padding: 1px 2px 1px 2px; /* Cambia de 4px a 2px */
+  vertical-align: middle;
+  background: transparent;
+  font-size: 0.89em;
+  line-height: 1.05;
+  position: relative;
+}
     
-       /* 🔥 NUEVO: Inputs legibles sin desbordamiento */
-    .datos-input {
-        width: calc(100% - 5px) !important;
-        border: none;
-        border-bottom: 1px solid #999;
-        font-size: 1.08em;              /* ⬅️ TAMAÑO INTERMEDIO (más grande que antes, pero sin salirse) */
-        background: transparent;
-        padding-left: 5px;
-        margin-bottom: 0px;
-        color: #222;
-        height: 21px;                   /* ⬅️ Ajustado para este tamaño */
-        box-sizing: border-box;
-        font-weight: normal;
-    }
+       /* 🔥 CAMBIO 2: Aumentar ancho del input y reducir padding */
+.datos-input {
+  width: calc(100% - 2px) !important; /* Cambia de -5px a -2px */
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 1.08em;
+  background: transparent;
+  padding-left: 2px; /* Cambia de 5px a 2px */
+  margin-bottom: 0px;
+  color: #222;
+  height: 21px;
+  box-sizing: border-box;
+  font-weight: normal;
+}
     .datos-label,
     .apoyo-elec-label-wrap,
     .extra-label {
