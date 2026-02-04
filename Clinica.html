@@ -133,8 +133,8 @@
       border-bottom: 1.1px solid #555;
     }
        /* 🔥 CAMBIO CRÍTICO: Reducir padding para ESPECIE */
-.datos-tabla tr:nth-child(1) td {
-  padding: 1px 2px 1px 2px !important;
+.datos-tabla td {
+  padding: 1px 1px 1px 1px;
   vertical-align: middle;
   background: transparent;
   font-size: 0.89em;
@@ -142,18 +142,20 @@
   position: relative;
 }
 
-/* 🔥 CAMBIO CRÍTICO: Aumentar ancho del input de ESPECIE */
-.datos-tabla tr:nth-child(1) .datos-input {
-  width: calc(100% - 1px) !important;
-  padding-left: 1px !important;
-  padding-right: 1px !important;
-  border-bottom: 1px solid #999;
-  font-size: 1.08em;
-  background: transparent;
-  color: #222;
-  height: 21px;
-  box-sizing: border-box;
-  font-weight: normal;
+/* 🔥 NUEVO: Inputs legibles sin desbordamiento */
+.datos-input {
+    width: calc(100% - 1px) !important;
+    border: none;
+    border-bottom: 1px solid #999;
+    font-size: 1.05em;
+    background: transparent;
+    padding-left: 1px;
+    padding-right: 1px;
+    margin-bottom: 0px;
+    color: #222;
+    height: 21px;
+    box-sizing: border-box;
+    font-weight: normal;
 }
     .datos-label,
     .apoyo-elec-label-wrap,
