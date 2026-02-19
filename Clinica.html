@@ -132,31 +132,28 @@
     .datos-tabla tr:not(:last-child) td {
       border-bottom: 1.1px solid #555;
     }
-       /* 🔥 CAMBIO CRÍTICO: Reducir padding para ESPECIE */
-.datos-tabla td {
-  padding: 1px 0px 1px 0px !important;
-  vertical-align: middle;
-  background: transparent;
-  font-size: 0.89em;
-  line-height: 1.05;
-  position: relative;
-}
-
-/* 🔥 NUEVO: Inputs legibles sin desbordamiento */
-.datos-input {
-    width: 100% !important;
-    border: none;
-    border-bottom: 1px solid #999;
-    font-size: 1.02em !important;
-    background: transparent;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-    margin-bottom: 0px;
-    color: #222;
-    height: 21px;
-    box-sizing: border-box;
-    font-weight: normal;
-}
+    .datos-tabla td {
+      padding: 1px 0px 1px 0px !important;
+      vertical-align: middle;
+      background: transparent;
+      font-size: 0.89em;
+      line-height: 1.05;
+      position: relative;
+    }
+    .datos-input {
+        width: 100% !important;
+        border: none;
+        border-bottom: 1px solid #999;
+        font-size: 1.02em !important;
+        background: transparent;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        margin-bottom: 0px;
+        color: #222;
+        height: 21px;
+        box-sizing: border-box;
+        font-weight: normal;
+    }
     .datos-label,
     .apoyo-elec-label-wrap,
     .extra-label {
@@ -635,6 +632,29 @@
       box-shadow: 0 2px 8px #aaa;
       background: #fff;
     }
+    
+    /* ✅ BOTÓN IMPRIMIR - AÑADIDO */
+    .btn-imprimir {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background: #7eb8da;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background 0.2s;
+      z-index: 1000;
+    }
+    
+    .btn-imprimir:hover {
+      background: #6aa8ca;
+    }
+    
     @media print {
       body {
         margin: 0;
@@ -665,9 +685,11 @@
       .trasera-img {
         box-shadow: none !important;
       }
-            /* 🔥 Ocultar placeholder de fecha de salida en impresión */
       .salida-fecha-manual::placeholder {
         color: transparent !important;
+      }
+      .btn-imprimir {
+        display: none !important;
       }
     }
     
@@ -683,6 +705,9 @@
   </style>
 </head>
 <body>
+  <!-- ✅ BOTÓN IMPRIMIR - AÑADIDO -->
+  <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir</button>
+  
   <!-- CARA 1: Ficha clínica -->
   <div class="pagina">
     <div class="a4-wrap">
@@ -888,7 +913,7 @@
     }
     window.onload = fillForm;
   </script>
-    <!-- ✅ BLOQUEAR CAMPOS: Solo lectura (no editable) -->
+  <!-- ✅ BLOQUEAR CAMPOS: Solo lectura (no editable) -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('input, textarea').forEach(el => {
