@@ -6,7 +6,7 @@
   <style>
     @page {
       size: A4 portrait;
-      margin: 1.5cm;
+      margin: 1.3cm;  /* ✅ Reducido de 1.5cm para ganar espacio imprimible */
     }
     body {
       font-family: Arial, sans-serif;
@@ -16,7 +16,7 @@
     }
     .pagina, .a4-wrap {
       max-width: 185mm;
-      min-height: 260mm;
+      min-height: 275mm;  /* ✅ Aumentado de 260mm para aprovechar la hoja */
       margin: 0 auto;
       box-sizing: border-box;
       padding: 0;
@@ -83,7 +83,7 @@
       box-sizing: border-box;
       letter-spacing: 1px;
       transition: none;
-      color: blue !important;  /* ✅ AÑADIR ESTA LÍNEA */
+      color: blue !important;
     }
     .fecha-label {
       font-size: 0.92em;
@@ -315,7 +315,7 @@
       font-weight: normal;
     }
     .cuadro-area-grande { min-height: 85px; max-height: 145px;}
-    .cuadro-area-medio { min-height: 45px; max-height: 70px;}
+    .cuadro-area-medio { min-height: 120px; max-height: 180px;}  /* ✅ OBSERVACIONES: Más grande */
     .cuadro-area-pequeno { min-height: 24px; max-height: 44px;}
     .cuadro-linea.sexo-edad-row {
       flex-wrap: nowrap;
@@ -462,7 +462,7 @@
     .salida-row {
       display: flex;
       flex-direction: row;
-      margin-top: 8px;
+      margin-top: 2px;  /* ✅ Reducido de 8px a 2px para conectar bloques */
       width: 100%;
       gap: 0;
       align-items: stretch;
@@ -676,9 +676,9 @@
       .reg-entrada-input {
         border: 2px solid #333 !important;
         background: none !important;
-         color: blue !important;                    /* ✅ AÑADIR */
-  -webkit-print-color-adjust: exact;         /* ✅ AÑADIR */
-  print-color-adjust: exact;                 /* ✅ AÑADIR */
+        color: blue !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
       .salida-checkbox {
         border: 1.3px solid #555 !important;
