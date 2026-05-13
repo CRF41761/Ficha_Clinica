@@ -886,10 +886,32 @@
       </div>
     </div>
   </div>
-  <!-- CARA 2: Trasera de la ficha -->
-  <div class="pagina">
+    <!-- CARA 2: Trasera de la ficha + QR superpuesto -->
+  <div class="pagina trasera-container">
     <img src="Trasera_Ficha_Clinica.jpg" alt="Hoja de seguimiento - Trasera ficha clínica" class="trasera-img">
+    
+    <!-- Overlay para el QR (posicionado sobre la imagen) -->
+    <div id="qr-mapa-overlay" class="qr-overlay">
+      <div id="qr-mapa-canvas"></div>
+      <div class="qr-label">Ubicación</div>
+    </div>
   </div>
+
+  <style>
+    .trasera-container { position: relative; width: 185mm; margin: 0 auto; page-break-after: always; }
+    .qr-overlay {
+      position: absolute; bottom: 12mm; right: 12mm; width: 42mm; height: 52mm;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      z-index: 10; background: rgba(255,255,255,0.95); border: 1px solid #999; border-radius: 3px;
+      padding: 4px 3px 3px 3px; box-sizing: border-box; display: none;
+    }
+    #qr-mapa-canvas canvas, #qr-mapa-canvas img { width: 36mm !important; height: 36mm !important; display: block; }
+    .qr-label { font-size: 7.5pt; font-weight: bold; color: #222; margin-top: 2px; text-align: center; line-height: 1; }
+    @media print {
+      .qr-overlay[data-ready="true"] { display: flex !important; }
+      .qr-overlay { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
   <!-- SCRIPT DE AUTORRELLENADO POR URL -->
   <script>
     function getParams() {
