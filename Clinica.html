@@ -969,5 +969,36 @@
     });
   }
 </script>
+    <!-- ✅ Script para generar QR desde coordenadas de la URL -->
+  <script>
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+    function parseCoordenadas(raw) {
+      if (!raw) return null;
+      const match = raw.toString().trim().match(/(-?\d+\.?\d*)\s*[,;.\s]\s*(-?\d+\.?\d*)/);
+      if (!match) return null;
+      const lat = parseFloat(match[1]);
+      const lng = parseFloat(match[2]);
+      return (isNaN(lat) || isNaN(lng)) ? null : { lat, lng };
+    }
+    function generarQRMapa() {
+      const coordsRaw = getParam('coordenadas_del_mapa') || getParam('coord_utm') || getParam('coordenadas_mapa');
+      const coords = parseCoordenadas(coordsRaw);
+      if (!coords) return console.log('⚠️ No hay coordenadas válidas para QR');
+      
+      const mapsURL = `https://www.google.com/maps?q=${coords.lat},${coords.lng}`;
+      const container = document.getElementById('qr-mapa-canvas');
+      if (!container) return;
+
+      QRCode.toCanvas(container, mapsURL, { width: 180, margin: 1, color: { dark: '#000000', light: '#FFFFFF' } }, function (error) {
+        if (error) return console.error('❌ Error QR:', error);
+        document.getElementById('qr-mapa-overlay').setAttribute('data-ready', 'true');
+      });
+    }
+    document.addEventListener('DOMContentLoaded', generarQRMapa);
+    window.addEventListener('load', () => setTimeout(generarQRMapa, 200));
+  </script>
 </body>
 </html>
