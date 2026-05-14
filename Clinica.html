@@ -297,77 +297,72 @@
     }
   </script>
 
-  <!-- ✅ QR: Generar con Google Charts API (SIN librerías externas) -->
+    <!-- ✅ QR: Generador con fallbacks automáticos (máxima compatibilidad) -->
   <script>
     function getParam(name) {
-      const params = new URLSearchParams(window.location.search);
-      return params.get(name);
+      return new URLSearchParams(window.location.search).get(name);
     }
     
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        // ✅ Priorizar qr_google_maps (decimal) para Google Maps
-        const coordsRaw = getParam('qr_google_maps') || getParam('coordenadas_del_mapa');
-        
-        if (!coordsRaw || coordsRaw.trim() === '') {
-          console.log('ℹ️ Sin coordenadas para QR');
+    function generarQRConFallback(mapsURL, container, onDone) {
+      const APIs = [
+        `https://api.qrserver.com/v1/create-qr-code/?size=150x150&margin=1&data=${encodeURIComponent(mapsURL)}`,
+        `https://quickchart.io/qr?size=150&text=${encodeURIComponent(mapsURL)}`,
+        `https://goqr.me/api/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(mapsURL)}`
+      ];
+      
+      function probarAPI(index) {
+        if (index >= APIs.length) {
+          // Fallback visual si todas las APIs fallan
+          container.innerHTML = `<div style="width:34mm;height:34mm;border:2px solid #666;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:6.5pt;text-align:center;padding:2px;color:#333;background:#f9f9f9;">🗺️ Ubicación:<br><strong style="font-size:6pt;">${mapsURL.replace('https://www.google.com/maps?q=','')}</strong></div>`;
+          onDone(true);
           return;
         }
-        
-        // Parsear: soporta "39.4168, -0.3703" o "738393, 4338682"
-        const match = coordsRaw.toString().trim().match(/(-?\d+\.?\d*)\s*[,;.\s]\s*(-?\d+\.?\d*)/);
-        if (!match) {
-          console.log('⚠️ Formato de coordenadas no reconocido:', coordsRaw);
-          return;
-        }
-        
-        let lat = parseFloat(match[1]);
-        let lng = parseFloat(match[2]);
-        if (isNaN(lat) || isNaN(lng)) {
-          console.log('⚠️ Coordenadas no numéricas');
-          return;
-        }
-        
-        // Si son valores UTM grandes (>100000), convertir aproximadamente a decimal
-        // Nota: esta conversión es aproximada; lo ideal es que Apps Script envíe ya decimales en qr_google_maps
-        if (Math.abs(lat) > 10000 || Math.abs(lng) > 10000) {
-          console.log('🔄 Detectadas coordenadas UTM, convirtiendo aproximadamente...');
-          // Conversión muy simplificada: dividir por 100000 (ajusta según tu zona UTM)
-          lat = lat / 100000;
-          lng = lng / 100000;
-        }
-        
-        const mapsURL = `https://www.google.com/maps?q=${lat.toFixed(6)},${lng.toFixed(6)}`;
-        
-        // ✅ Google Charts API: genera QR como imagen PNG
-        const qrImgURL = `https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=${encodeURIComponent(mapsURL)}&choe=UTF-8&chld=L|0`;
-        
-        const container = document.getElementById('qr-mapa-canvas');
-        if (!container) {
-          console.error('❌ No se encuentra #qr-mapa-canvas');
-          return;
-        }
-        
         const img = document.createElement('img');
-        img.src = qrImgURL;
+        img.src = APIs[index];
         img.alt = 'QR Google Maps';
         img.style.width = '34mm';
         img.style.height = '34mm';
         img.style.display = 'block';
-        img.onerror = function() {
-          console.error('❌ Error cargando QR desde Google Charts');
-        };
+        img.loading = 'eager';
         img.onload = function() {
-          const overlay = document.getElementById('qr-mapa-overlay');
-          if (overlay) {
-            overlay.setAttribute('data-ready', 'true');
-            console.log('✅ QR cargado y visible:', mapsURL);
-          }
+          console.log('✅ QR cargado con API #'+(index+1));
+          container.innerHTML = '';
+          container.appendChild(img);
+          onDone(true);
         };
+        img.onerror = function() {
+          console.warn('⚠️ API #'+(index+1)+' falló, probando siguiente...');
+          setTimeout(() => probarAPI(index + 1), 100);
+        };
+        setTimeout(() => { if (!img.complete && img.naturalWidth === 0) img.onerror(); }, 3000);
+      }
+      probarAPI(0);
+    }
+    
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const coordsRaw = getParam('qr_google_maps') || getParam('coordenadas_del_mapa');
+        if (!coordsRaw || coordsRaw.trim() === '') {
+          console.log('ℹ️ Sin coordenadas → QR omitido');
+          return;
+        }
+        const match = coordsRaw.toString().trim().match(/(-?\d+\.?\d*)\s*[,;.\s]\s*(-?\d+\.?\d*)/);
+        if (!match) { console.log('⚠️ Formato no reconocido:', coordsRaw); return; }
+        const lat = parseFloat(match[1]);
+        const lng = parseFloat(match[2]);
+        if (isNaN(lat) || isNaN(lng)) return;
         
-        container.innerHTML = '';
-        container.appendChild(img);
-      }, 400); // Delay para asegurar que el DOM está listo
+        const mapsURL = `https://www.google.com/maps?q=${lat},${lng}`;
+        const container = document.getElementById('qr-mapa-canvas');
+        if (!container) return;
+        
+        container.innerHTML = `<div style="width:34mm;height:34mm;display:flex;align-items:center;justify-content:center;font-size:6pt;color:#666;">⏳</div>`;
+        
+        generarQRConFallback(mapsURL, container, function(success) {
+          const overlay = document.getElementById('qr-mapa-overlay');
+          if (overlay) overlay.setAttribute('data-ready', 'true');
+        });
+      }, 400);
     });
   </script>
 </body>
