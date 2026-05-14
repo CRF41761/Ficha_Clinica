@@ -990,5 +990,45 @@
     });
   }
 </script>
+  
+  <!-- ✅ QR: Generar desde coordenadas decimales (qr_google_maps) -->
+  <script>
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+    
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // ✅ Priorizar qr_google_maps (decimal) para Google Maps
+        const coordsRaw = getParam('qr_google_maps') || getParam('coordenadas_del_mapa');
+        
+        if (!coordsRaw) {
+          console.log('ℹ️ Sin coordenadas para QR');
+          return;
+        }
+        
+        // Parsear: soporta "39.4168, -0.3703"
+        const match = coordsRaw.toString().match(/(-?\d+\.?\d*)\s*[,;.\s]\s*(-?\d+\.?\d*)/);
+        if (!match) return;
+        
+        const lat = parseFloat(match[1]);
+        const lng = parseFloat(match[2]);
+        if (isNaN(lat) || isNaN(lng)) return;
+        
+        const mapsURL = `https://www.google.com/maps?q=${lat},${lng}`;
+        const container = document.getElementById('qr-mapa-canvas');
+        if (!container || typeof QRCode === 'undefined') return;
+        
+        QRCode.toCanvas(container, mapsURL, { 
+          width: 200, margin: 0, color: { dark: '#000', light: '#fff' } 
+        }, function(err) {
+          if (err) return console.error('❌ QR error:', err);
+          document.getElementById('qr-mapa-overlay')?.setAttribute('data-ready', 'true');
+          console.log('✅ QR generado:', mapsURL);
+        });
+      }, 500);
+    });
+  </script>
 </body>
 </html>
